@@ -33,7 +33,15 @@ class Project:
         # ...with the above parameters
         pass
 
-    def delete(self):
+    def delete(self, app_id: str) -> str:
+        """Deletes a project
+
+        Args:
+            app_id (str): Project UUID
+
+        Returns:
+            str: Confirmation of delete
+        """
         pass
 
 
