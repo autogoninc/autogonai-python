@@ -1,3 +1,10 @@
-class Development:
+from autogonai.api import API
 
-    pass
+class Client(API):
+    from .functions import data_input
+    from .functions import missing_data
+    from .functions import feature_scaling
+    from .functions import data_encode
+
+    def __init__(self):
+        pass

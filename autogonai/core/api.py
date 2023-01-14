@@ -5,7 +5,7 @@ class Dashboard:
     def get(self):
         pass
 
-    def create():
+    def create(self):
         pass
 
     def delete(self):
