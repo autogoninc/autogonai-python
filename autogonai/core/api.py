@@ -1,3 +1,5 @@
+import requests
+
 class Dashboard:
     def __init__(self, client):
         self.client = client
@@ -31,7 +33,9 @@ class Project:
         """
         # make a request to autogon creating a project
         # ...with the above parameters
-        pass
+
+        response = {"name": name, "description": description}
+        return response
 
     def delete(self):
         pass
