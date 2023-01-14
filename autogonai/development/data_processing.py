@@ -1,4 +1,4 @@
-def data_input(self, data):
+def data_input(self, ):
     pass
 
 def missing_data(self):
