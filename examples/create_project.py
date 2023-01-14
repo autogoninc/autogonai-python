@@ -9,7 +9,7 @@ load_dotenv()
 API_KEY = os.environ.get("AUTOGON_API_KEY")
 
 # Driver Code
-client = Base()
+client = Base(api_key=API_KEY)
 project_object: dict = client.Project.create(
     "Project #0", "This is a short description for my first project"
 )
