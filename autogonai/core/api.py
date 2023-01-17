@@ -1,5 +1,6 @@
 import requests
 
+
 class Dashboard:
     def __init__(self, client):
         self.client = client
@@ -74,12 +75,4 @@ class Dataset:
         pass
 
     def delete(self):
-        pass
-
-
-class FunctionCode:
-    def __init__(self, client):
-        self.client = client
-
-    def get(self):
         pass

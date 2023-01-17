@@ -13,7 +13,7 @@ class API:
         proxies=None,
     ):
         if not base_url:
-            self.url = "https://autogon.ai/api/v1"
+            self.url = "https://autogon.ai/api/v1/"
         else:
             self.url = base_url
 

@@ -1,11 +1,14 @@
-def data_input(self, ):
-    pass
+from core.api import BaseBlock
 
-def missing_data(self):
+class DataInput(BaseBlock):
     pass
+    
 
-def feature_scaling(self):
-    pass
+# def missing_data(self):
+#     pass
 
-def data_encode(self):
-    pass
+# def feature_scaling(self):
+#     pass
+
+# def data_encode(self):
+#     pass
