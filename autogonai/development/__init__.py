@@ -1,10 +1,9 @@
 class Blocks:
     import autogonai.development.data_processing as dp
+    from autogonai.constants import function_codes as fc
     # from autogonai.development import DataInput
     
     endpoint = "engine/start"
-    
-    # DataInput = 'DP_1'
 
     def __init__(self, client):
         self.client = client
@@ -12,50 +11,22 @@ class Blocks:
     def get(self):
         pass
     
-    # def new(self,
-    #     client,
-    #     function_code: str,
-    #     project_id: int,
-    #     block_id: int,
-    #     parent_id: int = 0,):
-        
-    #     data = {
-    #         "client": client,
-    #         "project_id": project_id,
-    #         "parent_id": parent_id,
-    #         "block_id": block_id,
-    #         "function_code": function_code,
-    #     }
-        
-    #     if function_code == self.DataInput: return dp.DataInput(data)
-
-    def DataInput(self): return dp.DataInput(self.client)
-
-
-class BaseBlock:
-    def __init__(
-        self,
-        client,
+    def new(self,
         function_code: str,
         project_id: int,
         block_id: int,
-        parent_id: int = 0,
-    ) -> None:
-        self.client = client
-        self.body = {
+        parent_id: int = 0,):
+        
+        data = {
+            "client": self.client,
             "project_id": project_id,
             "parent_id": parent_id,
             "block_id": block_id,
             "function_code": function_code,
-            "args": {},
-            "flowjson": [],
         }
-        self.params = {}
+        
+        if function_code == self.fc.DataInput: return self.dp.DataInput(data)
+        if function_code == self.fc.DropColumns: return self.dp.DropColumns(data)
 
-    def set_params(self, **kwargs):
-        self.params = kwargs
-        return self.params
+    # def DataInput(self): return dp.DataInput(self.client)
 
-    def run(self):
-        self.body["args"] = self.params
-        return self.client.send_request(Blocks.endpoint, self.body)
