@@ -95,6 +95,17 @@ class FeatureScaleData(BaseBlock):
         }
         return self.params
 
+class DropColumns(BaseBlock):
+    def set_params(
+        self,
+        x_columns: list | None,
+        y_columns: list | None,
+    ):
+        self.params = {
+            'x_columns': x_columns,
+            'y_columns': y_columns,
+        }
+        return self.params
 
 class TimeStepData(BaseBlock):
     def set_params(

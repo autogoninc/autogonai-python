@@ -18,7 +18,7 @@ data_input.set_params(
     x_boundaries=":, :-1",
     y_boundaries=":, -1",
 )
-response = data_input_block.run()
+response = data_input.run()
 
 # Dropping columns
 print("Dropping unnecessary columns")
@@ -33,4 +33,4 @@ print("Handling missing data from specified columns")
 missing_data_handler = client.Blocks.new(
     function_code=fc.HandleMissingData, project_id=8, block_id=3, parent_id=2
 )
-# missing_data_handler.set_params
+print(missing_data_handler.body)

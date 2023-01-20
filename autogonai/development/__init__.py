@@ -26,7 +26,12 @@ class Blocks:
         }
         
         if function_code == self.fc.InputData: return self.dp.InputData(data)
+        if function_code == self.fc.HandleMissingData: return self.dp.HandleMissingData(data)
+        if function_code == self.fc.EncodeData: return self.dp.EncodeData(data)
+        if function_code == self.fc.SplitData: return self.dp.SplitData(data)
+        if function_code == self.fc.FeatureScaleData: return self.dp.FeatureScaleData(data)
         if function_code == self.fc.DropColumns: return self.dp.DropColumns(data)
+        if function_code == self.fc.TimeStepData: return self.dp.TimeStepData(data)
 
     # def InputData(self): return dp.InputData(self.client)
 
