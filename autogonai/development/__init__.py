@@ -1,7 +1,7 @@
 class Blocks:
     import autogonai.development.data_processing as dp
     from autogonai.constants import function_codes as fc
-    # from autogonai.development import DataInput
+    # from autogonai.development import InputData
     
     endpoint = "engine/start"
 
@@ -25,8 +25,8 @@ class Blocks:
             "function_code": function_code,
         }
         
-        if function_code == self.fc.DataInput: return self.dp.DataInput(data)
+        if function_code == self.fc.InputData: return self.dp.InputData(data)
         if function_code == self.fc.DropColumns: return self.dp.DropColumns(data)
 
-    # def DataInput(self): return dp.DataInput(self.client)
+    # def InputData(self): return dp.InputData(self.client)
 

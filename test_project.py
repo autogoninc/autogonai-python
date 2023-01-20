@@ -11,7 +11,7 @@ API_KEY = os.environ.get("AUTOGON_API_KEY")
 client = Client(api_key=API_KEY)
 
 print("Inputting data")
-data_input = client.Blocks.new(fc.DataInput, project_id=8, block_id=1)
+data_input = client.Blocks.new(fc.InputData, project_id=8, block_id=1)
 data_input.set_params(
     file_type="csv",
     dburl="https://raw.githubusercontent.com/The-Vheed/polygon-datasets/main/mobile_price_prediction.csv",
