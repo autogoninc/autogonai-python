@@ -1,5 +1,6 @@
 class Blocks:
     import autogonai.development.data_processing as dp
+    import autogonai.development.machine_learning as ml
     from autogonai.constants import function_codes as fc
 
     endpoint = "engine/start"
@@ -40,5 +41,31 @@ class Blocks:
             return self.dp.DropColumns(data)
         elif function_code == self.fc.TimeStepData:
             return self.dp.TimeStepData(data)
-
+        
+        elif function_code == self.fc.SimpleLinearRegression:
+            return self.ml.SimpleLinearRegression(data)
+        elif function_code == self.fc.SimpleLinearRegressionPredict:
+            return self.ml.SimpleLinearRegressionPredict(data)
+        elif function_code == self.fc.MultipleLinearRegression:
+            return self.ml.SimpleLinearRegression(data)
+        elif function_code == self.fc.MultipleLinearRegressionPredict:
+            return self.ml.MultipleLinearRegressionPredict(data)
+        elif function_code == self.fc.PolynomialLinearRegression:
+            return self.ml.PolynomialLinearRegression(data)
+        elif function_code == self.fc.PolynomialLinearRegressionPredict:
+            return self.ml.PolynomialLinearRegressionPredict(data)
+        elif function_code == self.fc.SupportVectorRegression:
+            return self.ml.SupportVectorRegression(data)
+        elif function_code == self.fc.SupportVectorRegressionPredict:
+            return self.ml.SupportVectorRegressionPredict(data)
+        elif function_code == self.fc.DecisionTreeRegression:
+            return self.ml.DecisionTreeRegression(data)
+        elif function_code == self.fc.DecisionTreeRegressionPredict:
+            return self.ml.DecisionTreeRegressionPredict(data)
+        elif function_code == self.fc.RandomForestRegression:
+            return self.ml.RandomForestRegression(data)
+        elif function_code == self.fc.RandomForestRegressionPredict:
+            return self.ml.RandomForestRegressionPredict(data)
+        
+        
     # def InputData(self): return dp.InputData(self.client)
