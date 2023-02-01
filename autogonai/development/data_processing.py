@@ -13,6 +13,7 @@ class InputData(BaseBlock):
         dbname: str = "",
         query: str = "",
     ):
+        '''InputData Parameters'''
         self.params = {
             "file_type": file_type,
             "dburl": dburl,
@@ -33,7 +34,7 @@ class HandleMissingData(BaseBlock):
         x_boundaries: str | None,
         y_boundaries: str | None,
     ):
-        '''HandleMissingData'''
+        '''HandleMissingData Parameters'''
         self.params = {
             "strategy_value": strategy_value,
             "x_boundaries": x_boundaries,
@@ -52,6 +53,7 @@ class EncodeData(BaseBlock):
         y_remainder: str | None = None,
         x_remainder: str | None = None,
     ):
+        '''EncodeData Parameters'''
         x_encode = True if not x_encoding_type == None else False
         y_encode = True if not y_encoding_type == None else False
         self.params = {
@@ -73,6 +75,7 @@ class EncodeData(BaseBlock):
 
 class SplitData(BaseBlock):
     def set_params(self, test_size: float, random_state: int | None = None):
+        '''SplitData Parameters'''
         self.params = {
             "test_size": test_size,
             "random_state": random_state,
@@ -88,6 +91,7 @@ class FeatureScaleData(BaseBlock):
         x: bool,
         boundaries: str,
     ):
+        '''FeatureScaleData Parameters'''
         self.params = {
             "xtrain": xtrain,
             "xtest": xtest,
@@ -102,6 +106,7 @@ class DropColumns(BaseBlock):
         x_columns: list | None,
         y_columns: list | None,
     ):
+        '''DropColumns Parameters'''
         self.params = {
             'x_columns': x_columns,
             'y_columns': y_columns,
@@ -114,6 +119,7 @@ class TimeStepData(BaseBlock):
         timestep: int,
         y_value_source: bool,
     ):
+        '''TimeStepData Parameters'''
         self.params = {
             "timestep": timestep,
             "y_value_source": y_value_source,
