@@ -33,6 +33,7 @@ class HandleMissingData(BaseBlock):
         x_boundaries: str | None,
         y_boundaries: str | None,
     ):
+        '''HandleMissingData'''
         self.params = {
             "strategy_value": strategy_value,
             "x_boundaries": x_boundaries,

@@ -32,6 +32,13 @@ class API:
             data = response.json()
         except ValueError:
             data = response.text
+        
+        if type(data) == str:
+            print(data)
+            raise Exception('An Internal Server Error')
+
+        if data['status'] == 'false':
+            raise Exception(data['message'])
 
         return data
 

@@ -24,13 +24,4 @@ class BaseBlock:
     def run(self):
         self.body["args"] = self.params
         response = self.client.send_request(self.endpoint, self.body)
-        
-        if type(response) == str:
-            print(response)
-            raise Exception('An Internal Server Error')
-            
-
-        if response['status'] == 'false':
-            raise Exception(response['message'])
-        
-        return
+        return response
