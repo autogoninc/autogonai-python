@@ -1,3 +1,6 @@
+from autogonai.development.base import BaseBlock
+
+
 class ArtificialNeuralNetworkInit(BaseBlock):
     def set_params(self, layer_list: list):
         """ArtificialNeuralNetworkInit Parameters"""
