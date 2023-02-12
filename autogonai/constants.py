@@ -8,6 +8,7 @@ class function_codes:
     DropColumns = "DP_DC"
     TimeStepData = "DP_TSP"
 
+
     # Machine Learning
     SimpleLinearRegression = "ML_R_1"
     SimpleLinearRegressionPredict = "ML_R_1_P"
@@ -21,3 +22,22 @@ class function_codes:
     DecisionTreeRegressionPredict = "ML_R_1_P"
     RandomForestRegression = "ML_R_1"
     RandomForestRegressionPredict = "ML_R_1_P"
+
+
+    # Deep Learning
+    ArtificialNeuralNetworkInit = "DL_ANN_I"
+    ArtificialNeuralNetworkTrain = "DL_ANN_T"
+    ArtificialNeuralNetworkEvaluate = "DL_ANN_E"
+    ArtificialNeuralNetworkPredict = "DL_ANN_P"
+
+    SelfOrganizingMapsInit = "DL_SOM_I"
+    SelfOrganizingMapsTrain = "DL_SOM_T"
+    SelfOrganizingMapsPredict = "DL_SOM_P"
+    
+    SelfOrganizingMapsInit = "DL_SOM_I"
+    SelfOrganizingMapsTrain = "DL_SOM_T"
+    SelfOrganizingMapsPredict = "DL_SOM_P"
+    
+    RestrictedBoltzmannMachineInit = "DL_RBM_I"
+    RestrictedBoltzmannMachineTrain = "DL_RBM_T"
+    RestrictedBoltzmannMachineTransform = "DL_RBM_TR"

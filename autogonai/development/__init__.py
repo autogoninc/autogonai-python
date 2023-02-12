@@ -1,6 +1,9 @@
 class Blocks:
     import autogonai.development.data_processing as dp
     import autogonai.development.machine_learning as ml
+    import autogonai.development.deep_learning as dl
+    
+    
     from autogonai.constants import function_codes as fc
 
     endpoint = "engine/start"
@@ -66,6 +69,27 @@ class Blocks:
             return self.ml.RandomForestRegression(data)
         elif function_code == self.fc.RandomForestRegressionPredict:
             return self.ml.RandomForestRegressionPredict(data)
+        
+        elif function_code == self.fc.ArtificialNeuralNetworkInit:
+            return self.dl.ArtificialNeuralNetworkInit(data)
+        elif function_code == self.fc.ArtificialNeuralNetworkTrain:
+            return self.dl.ArtificialNeuralNetworkTrain(data)
+        elif function_code == self.fc.ArtificialNeuralNetworkEvaluate:
+            return self.dl.ArtificialNeuralNetworkEvaluate(data)
+        elif function_code == self.fc.ArtificialNeuralNetworkPredict:
+            return self.dl.ArtificialNeuralNetworkPredict(data)
+        elif function_code == self.fc.SelfOrganizingMapsInit:
+            return self.dl.SelfOrganizingMapsInit(data)
+        elif function_code == self.fc.SelfOrganizingMapsTrain:
+            return self.dl.SelfOrganizingMapsTrain(data)
+        elif function_code == self.fc.SelfOrganizingMapsPredict:
+            return self.dl.SelfOrganizingMapsPredict(data)
+        elif function_code == self.fc.RestrictedBoltzmannMachineInit:
+            return self.dl.RestrictedBoltzmannMachineInit(data)
+        elif function_code == self.fc.RestrictedBoltzmannMachineTrain:
+            return self.dl.RestrictedBoltzmannMachineTrain(data)
+        elif function_code == self.fc.RestrictedBoltzmannMachineTransform:
+            return self.dl.RestrictedBoltzmannMachineTransform(data)
         
         
     # def InputData(self): return dp.InputData(self.client)
