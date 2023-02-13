@@ -16,11 +16,15 @@ class Dashboard:
 
 
 class Project:
+
+    endpoint = "engine/project/"
+
     def __init__(self, client):
         self.client = client
 
-    def get(self):
-        pass
+    def get(self, app_id: str):
+        response = self.client.send_request(self.endpoint+app_id, method='get')
+        return response
 
     def create(self, name: str, description: str) -> dict:
         """Create a project
@@ -32,10 +36,8 @@ class Project:
         Returns:
             dict: Project details
         """
-        # make a request to autogon creating a project
-        # ...with the above parameters
-
-        response = {"name": name, "description": description}
+        body = {"project_name": name, "project_description": description}
+        response = self.client.send_request(self.endpoint, body)
         return response
 
     def delete(self, app_id: str) -> str:

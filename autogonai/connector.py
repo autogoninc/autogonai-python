@@ -20,11 +20,14 @@ class API:
             self.url = base_url
         self.api_key = api_key
 
-    def send_request(self, endpoint, payload):
+    def send_request(self, endpoint, payload={}, method='post'):
         url = self.url + endpoint
 
         # response = requests.post(url, headers={"X-AUG-KEY": self.api_key}, json=payload)
-        response = requests.post(url, headers=test_header, json=payload)
+        if method.lower() == 'post':
+            response = requests.post(url, headers=test_header, json=payload)
+        elif method.lower() == 'get':
+            response = requests.get(url, headers=test_header)
 
         self._handle_exceptions(response)
 
@@ -37,7 +40,7 @@ class API:
             print(data)
             raise Exception('An Internal Server Error')
 
-        if data['status'] == 'false':
+        if data.get('status') == 'false':
             raise Exception(data['message'])
 
         return data
