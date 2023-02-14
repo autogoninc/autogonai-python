@@ -46,10 +46,10 @@ class HandleMissingData(BaseBlock):
 class EncodeData(BaseBlock):
     def set_params(
         self,
-        x_encoding_type: str,
-        x_index: int,
-        y_encoding_type: str,
-        y_index: int,
+        x_encoding_type: str = None,
+        x_index: int = 0,
+        y_encoding_type: str = None,
+        y_index: int = 0,
         y_remainder: str | None = None,
         x_remainder: str | None = None,
     ):

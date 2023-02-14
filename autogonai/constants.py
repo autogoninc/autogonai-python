@@ -41,3 +41,22 @@ class function_codes:
     RestrictedBoltzmannMachineInit = "DL_RBM_I"
     RestrictedBoltzmannMachineTrain = "DL_RBM_T"
     RestrictedBoltzmannMachineTransform = "DL_RBM_TR"
+    
+    # Auto Deep Learnning
+    AutoImageClassifierInit = "A_DL_IMC_I"
+    AutoImageClassifierTrain = "A_DL_IMC_T"
+    
+    AutoImageRegressionInit = "A_DL_IMR_I"
+    AutoImageRegressionTrain = "A_DL_IMR_T"
+    
+    AutoTextClassifierInit = "A_DL_TXC_I"
+    AutoTextClassifierTrain = "A_DL_TXC_T"
+    
+    AutoTextRegressionInit = "A_DL_TXR_I"
+    AutoTextRegressionTrain = "A_DL_TXR_T"
+    
+    AutoStructuredDataClassifierInit = "A_DL_SDC_I"
+    AutoStructuredDataClassifierTrain = "A_DL_SDC_T"
+    
+    AutoStructuredDataRegressionInit = "A_DL_SDR_I"
+    AutoStructuredDataRegressionTrain = "A_DL_SDR_T"

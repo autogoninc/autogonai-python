@@ -79,3 +79,58 @@ class RestrictedBoltzmannMachineTransform(BaseBlock):
         """RestrictedBoltzmannMachineTransform Parameters"""
         self.params = {"x_url": x_url}
         return self.params
+
+
+class AutoImageClassifierInit(BaseBlock):
+    def set_params(self, max_trials: int):
+        """AutoImageClassifierInit Parameters"""
+        self.params = {"max_trials": max_trials}
+        return self.params
+
+
+class AutoImageClassifierTrain(BaseBlock):
+    def set_params(self, train_data_block: int, model_save_name: str, hyp_params: dict):
+        """AutoImageClassifierTrain Parameters"""
+        self.params = {
+            "train_data_block": train_data_block,
+            "model_save_name": model_save_name,
+            "hyp_params": hyp_params,
+        }
+        return self.params
+
+class AutoTextClassifierInit(BaseBlock):
+    def set_params(self, max_trials: int):
+        """AutoTextClassifierInit Parameters"""
+        self.params = {"max_trials": max_trials}
+        return self.params
+
+
+class AutoTextClassifierTrain(BaseBlock):
+    def set_params(self, train_data_block: int, model_save_name: str, hyp_params: dict):
+        """AutoTextClassifierTrain Parameters"""
+        self.params = {
+            "train_data_block": train_data_block,
+            "model_save_name": model_save_name,
+            "hyp_params": hyp_params,
+        }
+        return self.params
+
+class AutoStructuredDataClassifierInit(BaseBlock):
+    def set_params(self, max_trials: int):
+        """AutoStructuredDataClassifierInit Parameters"""
+        self.params = {"max_trials": max_trials}
+        return self.params
+
+
+class AutoStructuredDataClassifierTrain(BaseBlock):
+    def set_params(self, train_data_block: int, model_save_name: str, hyp_params: dict):
+        """AutoStructuredDataClassifierTrain Parameters"""
+        self.params = {
+            "train_data_block": train_data_block,
+            "model_save_name": model_save_name,
+            "hyp_params": hyp_params,
+        }
+        return self.params
+
+
+
