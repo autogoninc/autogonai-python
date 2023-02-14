@@ -25,7 +25,7 @@ class function_codes:
 
 
     # Deep Learning
-    ArtificialNeuralNetworkInit = "DL_ANN_I"
+    ArtificialNeuralNetworkInit = "DL_ANN_S_I"
     ArtificialNeuralNetworkTrain = "DL_ANN_T"
     ArtificialNeuralNetworkEvaluate = "DL_ANN_E"
     ArtificialNeuralNetworkPredict = "DL_ANN_P"
