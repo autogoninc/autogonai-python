@@ -1,5 +1,6 @@
 import json
 import requests
+from .erros import AutogonRequestError, AutogonServerError
 
 test_header = {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNjYzODU1LCJqdGkiOiIyNDUzZWE1YTU1ZWY0YTZhYTRmZTRjMDAzMzQ2NDk0MiIsInVzZXJfaWQiOjZ9.4qgVMwvkxYZgN5CzLrMEk-0SWq4Rtoq2zh17i2QDdrA"}
 
@@ -28,6 +29,8 @@ class API:
             response = requests.post(url, headers=test_header, json=payload)
         elif method.lower() == 'get':
             response = requests.get(url, headers=test_header)
+        elif method.lower() == 'delete':
+            response = requests.delete(url, headers=test_header)
 
         self._handle_exceptions(response)
 
@@ -37,11 +40,11 @@ class API:
             data = response.text
         
         if type(data) == str:
-            print(data)
-            raise Exception('An Internal Server Error')
+            # print(data)
+            raise AutogonServerError('data')
 
         if data.get('status') == 'false':
-            raise Exception(data['message'])
+            raise AutogonRequestError(data['message'])
 
         return data
 

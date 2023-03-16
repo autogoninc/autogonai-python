@@ -58,11 +58,12 @@ class Project:
         Returns:
             str: Confirmation of delete
         """
-        pass
+        response = self.client.send_request(self.endpoint + app_id, method="delete")
+        return response
 
 
 class StateManagement:
-    """Handles all StateManagement  Specific operations"""
+    """Handles all StateManagement Specific operations"""
     def __init__(self, client):
         self.client = client
 
