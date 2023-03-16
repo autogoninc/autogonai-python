@@ -1,6 +1,6 @@
 import json
 import requests
-from .erros import AutogonRequestError, AutogonServerError
+from .errors import AutogonRequestError, AutogonServerError
 
 test_header = {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNjYzODU1LCJqdGkiOiIyNDUzZWE1YTU1ZWY0YTZhYTRmZTRjMDAzMzQ2NDk0MiIsInVzZXJfaWQiOjZ9.4qgVMwvkxYZgN5CzLrMEk-0SWq4Rtoq2zh17i2QDdrA"}
 
@@ -41,10 +41,10 @@ class API:
         
         if type(data) == str:
             # print(data)
-            raise AutogonServerError('data')
+            raise AutogonServerError(response.status_code, data)
 
         if data.get('status') == 'false':
-            raise AutogonRequestError(data['message'])
+            raise AutogonRequestError(response.status_code, data['message'])
 
         return data
 
