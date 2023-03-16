@@ -4,6 +4,13 @@ from autogonai.connector import API
 
 
 class Client(API):
+    """
+    The AutogonAI Python Client that acts as an interface between AutogonAI and Python projects
+
+    Args:
+        api_key (str): The API key gotten from user settings from the AutogonAI platform
+
+    """
 
     def __init__(self, api_key, **kwargs):
         self.api_key = api_key
@@ -17,4 +24,3 @@ class Client(API):
         self.StateManagement = StateManagement(self)
         self.Dataset = Dataset(self)
         self.Blocks = Blocks(self)
-

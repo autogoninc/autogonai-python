@@ -16,6 +16,7 @@ class Dashboard:
 
 
 class Project:
+    """Handles all Project Specific operations"""
 
     endpoint = "engine/project/"
 
@@ -23,7 +24,15 @@ class Project:
         self.client = client
 
     def get(self, app_id: str):
-        response = self.client.send_request(self.endpoint+app_id, method='get')
+        """Fetches an existing Project
+
+        Args:
+            app_id (str): Project UUID
+
+        Returns:
+            dict: Project details
+        """
+        response = self.client.send_request(self.endpoint + app_id, method="get")
         return response
 
     def create(self, name: str, description: str) -> dict:
@@ -53,6 +62,7 @@ class Project:
 
 
 class StateManagement:
+    """Handles all StateManagement  Specific operations"""
     def __init__(self, client):
         self.client = client
 
