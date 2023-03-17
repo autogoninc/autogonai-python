@@ -5,8 +5,8 @@ class function_codes:
     EncodeData = "DP_3"
     SplitData = "DP_4"
     FeatureScaleData = "DP_5"
-    DropColumns = "DP_DC"
-    TimeStepData = "DP_TSP"
+    DropColumns = "DP_7" # "DP_DC"
+    TimeStepData = "DP_8" # "DP_TSP"
 
     # Machine Learning
     SimpleLinearRegression = "ML_R_1"
