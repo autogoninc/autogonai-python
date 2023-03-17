@@ -2,7 +2,7 @@ import json
 import requests
 from .errors import AutogonRequestError, AutogonServerError
 
-test_header = {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNjYzODU1LCJqdGkiOiIyNDUzZWE1YTU1ZWY0YTZhYTRmZTRjMDAzMzQ2NDk0MiIsInVzZXJfaWQiOjZ9.4qgVMwvkxYZgN5CzLrMEk-0SWq4Rtoq2zh17i2QDdrA"}
+test_header = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2NTAyNzYzLCJqdGkiOiIwZTI4NDI4YWVhY2U0Mzg3YjRlMDY3ZjRkZDQ1MDU5YyIsInVzZXJfaWQiOjl9.mWhfLm8ptiYngvTpKYnp4ytQU08HqBh3Vux7_9gXZvc"}
 
 class API:
     def __init__(
