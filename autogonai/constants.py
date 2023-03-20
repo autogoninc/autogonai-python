@@ -5,8 +5,8 @@ class function_codes:
     EncodeData = "DP_3"
     SplitData = "DP_4"
     FeatureScaleData = "DP_5"
-    DropColumns = "DP_7" # "DP_DC"
-    TimeStepData = "DP_8" # "DP_TSP"
+    DropColumns = "DP_6" # "DP_DC"
+    TimeStepData = "DP_7" # "DP_TSP"
 
     # Machine Learning
     SimpleLinearRegression = "ML_R_1"
@@ -35,8 +35,10 @@ class function_codes:
     DecisionTreeClassificationPredict = "ML_CN_6_P"
     RandomForestClassification = "ML_CN_7"
     RandomForestClassificationPredict = "ML_CN_7_P"
-    HierarchicalClustering = "ML_CG_5"
-    HierarchicalClusteringPredict = "ML_CG_5_P"
+    HierarchicalClustering = "ML_CG_1"
+    HierarchicalClusteringPredict = "ML_CG_1_P"
+    KMeansClustering = "ML_CG_2"
+    KMeansClusteringPredict = "ML_CG_2_P"
     XGBoost = "MS_XGBOOST"
     XGBoostPredict = "MS_XGBOOST_P"
     

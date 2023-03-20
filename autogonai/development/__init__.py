@@ -69,6 +69,47 @@ class Blocks:
             return self.ml.RandomForestRegression(data)
         elif function_code == self.fc.RandomForestRegressionPredict:
             return self.ml.RandomForestRegressionPredict(data)
+        elif function_code == self.fc.LogisticRegression:
+            return self.ml.LogisticRegression(data)
+        elif function_code == self.fc.LogisticRegressionPredict:
+            return self.ml.LogisticRegressionPredict(data)
+        elif function_code == self.fc.KNearestNeighbors:
+            return self.ml.KNearestNeighbors(data)
+        elif function_code == self.fc.KNearestNeighborsPredict:
+            return self.ml.KNearestNeighborsPredict(data)
+        elif function_code == self.fc.SupportVectorMachine:
+            return self.ml.SupportVectorMachine(data)
+        elif function_code == self.fc.SupportVectorMachinePredict:
+            return self.ml.SupportVectorMachinePredict(data)
+        elif function_code == self.fc.KernelSupportVectorMachine:
+            return self.ml.KernelSupportVectorMachine(data)
+        elif function_code == self.fc.KernelSupportVectorMachinePredict:
+            return self.ml.KernelSupportVectorMachinePredict(data)
+        elif function_code == self.fc.NaiveBayes:
+            return self.ml.NaiveBayes(data)
+        elif function_code == self.fc.NaiveBayesPredict:
+            return self.ml.NaiveBayesPredict(data)
+        elif function_code == self.fc.DecisionTreeClassification:
+            return self.ml.DecisionTreeClassification(data)
+        elif function_code == self.fc.DecisionTreeClassificationPredict:
+            return self.ml.DecisionTreeClassificationPredict(data)
+        elif function_code == self.fc.RandomForestClassification:
+            return self.ml.RandomForestClassification(data)
+        elif function_code == self.fc.RandomForestClassificationPredict:
+            return self.ml.RandomForestClassificationPredict(data)
+        elif function_code == self.fc.HierarchicalClustering:
+            return self.ml.HierarchicalClustering(data)
+        elif function_code == self.fc.HierarchicalClusteringPredict:
+            return self.ml.HierarchicalClusteringPredict(data)
+        elif function_code == self.fc.KMeansClustering:
+            return self.ml.KMeansClustering(data)
+        elif function_code == self.fc.KMeansClusteringPredict:
+            return self.ml.KMeansClusteringPredict(data)
+        elif function_code == self.fc.XGBoost:
+            return self.ml.XGBoost(data)
+        elif function_code == self.fc.XGBoostPredict:
+            return self.ml.XGBoostPredict(data)
+        
         
         elif function_code == self.fc.ArtificialNeuralNetworkInit:
             return self.dl.ArtificialNeuralNetworkInit(data)
