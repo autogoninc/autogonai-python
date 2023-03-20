@@ -20,7 +20,7 @@ class Client(API):
         super().__init__(api_key=api_key, **kwargs)
 
         self.Dashboard = Dashboard(self)
-        self.Project = Project(self)
-        self.StateManagement = StateManagement(self)
-        self.Dataset = Dataset(self)
+        self.Projects = Projects(self)
+        self.StateManagements = StateManagements(self)
+        self.Datasets = Datasets(self)
         self.Blocks = Blocks(self)

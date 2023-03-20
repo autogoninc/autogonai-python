@@ -1,17 +1,19 @@
 import json
 
 
-class BaseBlock:
+class BaseBlock(int):
 
     endpoint = "engine/start"
 
-    def __init__(self, data) -> None:
-        self.client = data["client"]
-        self.project_id = data['project_id']
-        self.block_id = data['block_id']
-        self.parent_id = data['parent_id']
-        self.function_code = data['function_code']
-        self.params = {}
+    def __new__(cls, data):
+        i = int.__new__(cls, data['block_id'])
+        i.client = data["client"]
+        i.project_id = data['project_id']
+        i.block_id = data['block_id']
+        i.parent_id = data['parent_id']
+        i.function_code = data['function_code']
+        i.params = {}
+        return i
 
     def set_params(self, **kwargs):
         self.params = kwargs
