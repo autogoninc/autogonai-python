@@ -1,111 +1,118 @@
 import requests
 from collections import UserDict
 
-
-class Dashboard:
-    def __init__(self, client):
-        self.client = client
-
-    def get(self):
-        pass
-
-    def create(self):
-        pass
-
-    def delete(self):
-        pass
+from .error import APIError, UnauthorizedError
 
 
-class Projects:
-    """Handles all Project Specific operations"""
+base_api_url = "https://api.autogon.ai/api/v1"
 
-    endpoint = "engine/project/"
+"""
+Define a base API class that will be used to make requests to the AutoGon API.
+"""
+class AutoGonAPI:
+    """Base class for AutoGon API."""
 
-    def __init__(self, client):
-        self.client = client
-
-    def get(self, app_id: str):
-        """Fetches an existing Project
+    @staticmethod
+    def request(method: str, url: str, headers: dict, body: dict = None) -> dict:
+        """Make a request to the AutoGon API.
 
         Args:
-            app_id (str): Project UUID
+            method (str): HTTP method.
+            url (str): URL to make request to.
+            headers (dict): HTTP headers.
+            body (dict, optional): HTTP body. Defaults to None.
+
+        Raises:
+            APIError: Error raised by the API.
+            UnauthorizedError: Error raised when API key is invalid.
 
         Returns:
-            dict: Project details
+            dict: Response from the API.
         """
-        response = self.client.send_request(self.endpoint + app_id, method="get")
-        return Project(response)
 
-    def create(self, name: str, description: str) -> dict:
-        """Create a project
+        # Construct the request URL
+        url = base_api_url + url # https://api.autogon.ai/api/v1 + /projects/
 
-        Args:
-            name (str): name of the project
-            description (str): short description for project
+        # Make request to the API if method is GET, POST, PUT, PATCH or DELETE
+        if method.lower() in ["get", "post", "put", "patch", "delete"]:
+            response = requests.request(method, url, headers=headers, json=body)
 
-        Returns:
-            dict: Project details
-        """
-        body = {"project_name": name, "project_description": description}
-        response = self.client.send_request(self.endpoint, body)
+        # Raise an error if method is not one of the above
+        else:
+            raise ValueError(f"Invalid request method {method}", 400)
+        
+        if response.status_code == 401:
+            raise UnauthorizedError()
+        if response.status_code >= 400:
+            raise APIError(response.json()["message"], response.status_code)
         return response
-
-    def delete(self, app_id: str) -> str:
-        """Deletes a project
-
-        Args:
-            app_id (str): Project UUID
-
-        Returns:
-            str: Confirmation of delete
-        """
-        response = self.client.send_request(self.endpoint + app_id, method="delete")
-        return response
-
-
-class Project(int):
-    data = {}
-    id = 0
-    app_id = ''
-    name = ''
-    description = ''
-    compiled_models = {}
     
-    def __new__(cls, data):
-        i = int.__new__(cls, data['id'])
-        i.data = data
-        i.id = data["id"]
-        i.app_id = data["app_id"]
-        i.name = data["project_name"]
-        i.description = data["project_description"]
-        i.compiled_models = data['project_compiled_models']
-        return i
+    @staticmethod
+    def get(url: str, headers: dict) -> dict:
+        """Make a GET request to the AutoGon API.
 
-class StateManagements:
-    """Handles all StateManagement Specific operations"""
+        Args:
+            url (str): URL to make request to.
+            headers (dict): HTTP headers.
 
-    def __init__(self, client):
-        self.client = client
+        Returns:
+            dict: Response from the API.
+        """
+        return AutoGonAPI.request("get", url, headers)
+    
+    @staticmethod
+    def post(url: str, headers: dict, body: dict) -> dict:
+        """Make a POST request to the AutoGon API.
 
-    def get(self):
-        pass
+        Args:
+            url (str): URL to make request to.
+            headers (dict): HTTP headers.
+            body (dict): HTTP body.
 
-    def create():
-        pass
+        Returns:
+            dict: Response from the API.
+        """
+        return AutoGonAPI.request("post", url, headers, body)
+    
+    @staticmethod
+    def put(url: str, headers: dict, body: dict) -> dict:
+        """Make a PUT request to the AutoGon API.
 
-    def delete(self):
-        pass
+        Args:
+            url (str): URL to make request to.
+            headers (dict): HTTP headers.
+            body (dict): HTTP body.
 
+        Returns:
+            dict: Response from the API.
+        """
+        return AutoGonAPI.request("put", url, headers, body)
+    
+    @staticmethod
+    def patch(url: str, headers: dict, body: dict) -> dict:
+        """Make a PATCH request to the AutoGon API.
 
-class Datasets:
-    def __init__(self, client):
-        self.client = client
+        Args:
+            url (str): URL to make request to.
+            headers (dict): HTTP headers.
+            body (dict): HTTP body.
 
-    def get(self):
-        pass
+        Returns:
+            dict: Response from the API.
+        """
+        return AutoGonAPI.request("patch", url, headers, body)
+    
+    @staticmethod
+    def delete(url: str, headers: dict) -> dict:
+        """Make a DELETE request to the AutoGon API.
 
-    def create():
-        pass
+        Args:
+            url (str): URL to make request to.
+            headers (dict): HTTP headers.
 
-    def delete(self):
-        pass
+        Returns:
+            dict: Response from the API.
+        """
+        return AutoGonAPI.request("delete", url, headers, body=None)
+    
+    

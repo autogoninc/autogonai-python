@@ -2,6 +2,8 @@ from .api import *
 from autogonai.development import Blocks
 from autogonai.connector import API
 
+from autogonai.core.project import Project
+
 
 class Client(API):
     """
@@ -19,8 +21,9 @@ class Client(API):
 
         super().__init__(api_key=api_key, **kwargs)
 
-        self.Dashboard = Dashboard(self)
-        self.Projects = Projects(self)
-        self.StateManagements = StateManagements(self)
-        self.Datasets = Datasets(self)
+        self.Project = Project(self)
+
+        # self.Dashboard = Dashboard(self)
+        # self.StateManagements = StateManagements(self)
+        # self.Datasets = Datasets(self)
         self.Blocks = Blocks(self)

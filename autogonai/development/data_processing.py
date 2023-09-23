@@ -1,5 +1,7 @@
 from autogonai.development.base import BaseBlock
 
+from typing import Any, Optional
+
 
 class InputData(BaseBlock):
     def set_params(
@@ -124,4 +126,83 @@ class TimeStepData(BaseBlock):
             "timestep": timestep,
             "y_value_source": y_value_source,
         }
+        return self.params
+
+class FeatureSampleData(BaseBlock):
+    def set_params(
+            self,
+            dataset_url: str,
+            x_boundaries: tuple, 
+            y_boundaries: tuple,
+    ):
+        self.params = {
+            "dataset_url": dataset_url,
+            "x_boundaries": x_boundaries,
+            "y_boundaries": y_boundaries
+        }
+        return self.params
+    
+class ReshapeArray(BaseBlock):
+    def set_params(
+            self,
+            dataset_url: str,
+            dimensions: tuple,
+    ):
+        self.params = {
+            "dataset_url": dataset_url,
+            "dimensions": dimensions,
+        } 
+        return self.params
+    
+class ScalarToNdarray(BaseBlock):
+    def set_params(
+            self,
+            scalar: Optional(Any), 
+            ndims: Optional(Any),
+    ):
+        self.params = {
+            "scalar": scalar,
+            "ndims": ndims,
+        } 
+        return self.params
+    
+class ImageToNdarray(BaseBlock):
+    def set_params(
+            self,
+            image: str, 
+            size: Optional(Any),
+    ):
+        self.params = {
+            "image": image,
+            "size": size,
+        } 
+        return self.params
+    
+class ColumnsAstype(BaseBlock):
+    def set_params(
+            self,
+            dataset_url: str,
+            column_indices: Optional(Any),
+            datatype: Optional(str),
+    ):
+        self.params = {
+            "dataset_url": dataset_url,
+            "column_indices": column_indices,
+            "datatype": datatype,
+        } 
+        return self.params
+    
+class AutoDP(BaseBlock):
+    def set_params(
+            self,
+    ):
+        self.params = {}
+        return self.params
+    
+class TextVectorizer(BaseBlock):
+    def set_params(
+            self,
+
+    ):
+        self.params = {}
         return self.params
