@@ -122,7 +122,7 @@ class TimeStepData(BaseBlock):
         return self.params
 
 
-class FeatureSampleData(BaseBlock):
+class FeatureSampling(BaseBlock):
     def set_params(
         self,
         dataset_url: str,
@@ -190,7 +190,109 @@ class AutoDP(BaseBlock):
 
 class TextVectorizer(BaseBlock):
     def set_params(
-        self,
+        self, vectorizer, boundariestoscale, dataset, xtrain, xtest, x, ytrain, ytest, y
     ):
-        self.params = {}
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ParseDatetime(BaseBlock):
+    def set_params(self, format, columns):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ReorderColumn(BaseBlock):
+    def set_params(self, order):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ColumnAstype(BaseBlock):
+    def set_params(self, dtype, columns):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ShowDuplicates(BaseBlock):
+    def set_params(self, columns):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class DropDuplicates(BaseBlock):
+    def set_params(self, columns):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class DatasetInfo(BaseBlock):
+    def set_params(self):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class DatasetCorrelations(BaseBlock):
+    def set_params(self, method):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class DatasetDescription(BaseBlock):
+    def set_params(self):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class DatasetUniques(BaseBlock):
+    def set_params(self):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class StatsCounts(BaseBlock):
+    def set_params(self, columns):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class PrincipalComponentAnalysis(BaseBlock):
+    def set_params(self, n_components):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class Resampler(BaseBlock):
+    def set_params(self, method):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ScatterPlot(BaseBlock):
+    def set_params(self, x, y):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class OrdinaryPlot(BaseBlock):
+    def set_params(self, x, y):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class CompareScatterPlots(BaseBlock):
+    def set_params(self, x1, y1, x2, y2):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class PiePlot(BaseBlock):
+    def set_params(self, labels, values):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class HeatmapPlot(BaseBlock):
+    def set_params(self, data):
+        self.params = gen_params(locals())
         return self.params
