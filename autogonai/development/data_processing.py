@@ -197,19 +197,21 @@ class TextVectorizer(BaseBlock):
 
 
 class ParseDatetime(BaseBlock):
-    def set_params(self, format, columns):
+    def set_params(self, index, drop):
         self.params = gen_params(locals())
         return self.params
 
 
 class ReorderColumn(BaseBlock):
-    def set_params(self, order):
+    def set_params(
+        self, column, posititon, dataset, xtrain, xtest, x, ytrain, ytest, y
+    ):
         self.params = gen_params(locals())
         return self.params
 
 
 class ColumnAstype(BaseBlock):
-    def set_params(self, dtype, columns):
+    def set_params(self, astype, columns):
         self.params = gen_params(locals())
         return self.params
 
@@ -233,7 +235,7 @@ class DatasetInfo(BaseBlock):
 
 
 class DatasetCorrelations(BaseBlock):
-    def set_params(self, method):
+    def set_params(self):
         self.params = gen_params(locals())
         return self.params
 
@@ -251,48 +253,48 @@ class DatasetUniques(BaseBlock):
 
 
 class StatsCounts(BaseBlock):
-    def set_params(self, columns):
+    def set_params(self, index):
         self.params = gen_params(locals())
         return self.params
 
 
 class PrincipalComponentAnalysis(BaseBlock):
-    def set_params(self, n_components):
+    def set_params(self, n_components, dataset, xtrain, xtest, x, ytrain, ytest, y):
         self.params = gen_params(locals())
         return self.params
 
 
 class Resampler(BaseBlock):
-    def set_params(self, method):
+    def set_params(self, xy, xy_train, xy_test, resampler, save_name):
         self.params = gen_params(locals())
         return self.params
 
 
 class ScatterPlot(BaseBlock):
-    def set_params(self, x, y):
+    def set_params(self, xvalue, yvalue, is_grid):
         self.params = gen_params(locals())
         return self.params
 
 
 class OrdinaryPlot(BaseBlock):
-    def set_params(self, x, y):
+    def set_params(self, xvalue, yvalue, is_grid):
         self.params = gen_params(locals())
         return self.params
 
 
 class CompareScatterPlots(BaseBlock):
-    def set_params(self, x1, y1, x2, y2):
+    def set_params(self, avalue, bvalue, xvalue, yvalue, is_grid):
         self.params = gen_params(locals())
         return self.params
 
 
 class PiePlot(BaseBlock):
-    def set_params(self, labels, values):
+    def set_params(self, dataset):
         self.params = gen_params(locals())
         return self.params
 
 
 class HeatmapPlot(BaseBlock):
-    def set_params(self, data):
+    def set_params(self, dataset):
         self.params = gen_params(locals())
         return self.params
