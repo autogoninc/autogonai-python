@@ -2,6 +2,7 @@ import requests
 from collections import UserDict
 
 
+# Define a class named 'Dashboard'
 class Dashboard:
     def __init__(self, client):
         self.client = client
@@ -16,6 +17,7 @@ class Dashboard:
         pass
 
 
+# Define a class named 'Projects' for project-specific operations
 class Projects:
     """Handles all Project Specific operations"""
 
@@ -34,6 +36,7 @@ class Projects:
             dict: Project details
         """
         response = self.client.send_request(self.endpoint + app_id, method="get")
+        print(response)
         return Project(response)
 
     def create(self, name: str, description: str) -> dict:
@@ -63,24 +66,27 @@ class Projects:
         return response
 
 
+# Define a class named 'Project' that inherits from 'int'
 class Project(int):
     data = {}
     id = 0
-    app_id = ''
-    name = ''
-    description = ''
+    app_id = ""
+    name = ""
+    description = ""
     compiled_models = {}
-    
+
     def __new__(cls, data):
-        i = int.__new__(cls, data['id'])
+        i = int.__new__(cls, data["id"])
         i.data = data
         i.id = data["id"]
         i.app_id = data["app_id"]
         i.name = data["project_name"]
         i.description = data["project_description"]
-        i.compiled_models = data['project_compiled_models']
+        i.compiled_models = data["project_compiled_models"]
         return i
 
+
+# Define a class named 'StateManagements' for state management operations
 class StateManagements:
     """Handles all StateManagement Specific operations"""
 
@@ -97,6 +103,7 @@ class StateManagements:
         pass
 
 
+# Define a class named 'Datasets' for dataset operations
 class Datasets:
     def __init__(self, client):
         self.client = client

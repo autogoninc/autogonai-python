@@ -1,6 +1,21 @@
 from autogonai.development.base import BaseBlock
 
 
+def gen_params(arg_pairs):
+    # Create an empty dictionary to store the arguments
+    arguments_dict = {}
+
+    # Get all local variables (including function arguments) as a dictionary
+    local_variables = arg_pairs
+
+    # Iterate through the local variables and store the arguments in the dictionary
+    for key, value in local_variables.items():
+        if key != "self":  # Exclude 'self' if it's a method within a class
+            arguments_dict[key] = value
+
+    return arguments_dict
+
+
 class InputData(BaseBlock):
     def set_params(
         self,
@@ -13,17 +28,8 @@ class InputData(BaseBlock):
         dbname: str = "",
         query: str = "",
     ):
-        '''InputData Parameters'''
-        self.params = {
-            "file_type": file_type,
-            "dburl": dburl,
-            "x_boundaries": x_boundaries,
-            "y_boundaries": y_boundaries,
-            "dbservertype": dbservertype,
-            "dbpassword": dbpassword,
-            "dbname": dbname,
-            "query": query,
-        }
+        """InputData Parameters"""
+        self.params = gen_params(locals())
         return self.params
 
 
@@ -34,12 +40,8 @@ class HandleMissingData(BaseBlock):
         x_boundaries: str | None,
         y_boundaries: str | None,
     ):
-        '''HandleMissingData Parameters'''
-        self.params = {
-            "strategy_value": strategy_value,
-            "x_boundaries": x_boundaries,
-            "y_boundaries": y_boundaries,
-        }
+        """HandleMissingData Parameters"""
+        self.params = gen_params(locals())
         return self.params
 
 
@@ -53,7 +55,7 @@ class EncodeData(BaseBlock):
         y_remainder: str | None = None,
         x_remainder: str | None = None,
     ):
-        '''EncodeData Parameters'''
+        """EncodeData Parameters"""
         x_encode = True if not x_encoding_type == None else False
         y_encode = True if not y_encoding_type == None else False
         self.params = {
@@ -75,11 +77,8 @@ class EncodeData(BaseBlock):
 
 class SplitData(BaseBlock):
     def set_params(self, test_size: float, random_state: int | None = None):
-        '''SplitData Parameters'''
-        self.params = {
-            "test_size": test_size,
-            "random_state": random_state,
-        }
+        """SplitData Parameters"""
+        self.params = gen_params(locals())
         return self.params
 
 
@@ -91,7 +90,7 @@ class FeatureScaleData(BaseBlock):
         x: bool,
         boundaries: str,
     ):
-        '''FeatureScaleData Parameters'''
+        """FeatureScaleData Parameters"""
         self.params = {
             "xtrain": xtrain,
             "xtest": xtest,
@@ -100,18 +99,17 @@ class FeatureScaleData(BaseBlock):
         }
         return self.params
 
+
 class DropColumns(BaseBlock):
     def set_params(
         self,
         x_columns: list | None,
         y_columns: list | None,
     ):
-        '''DropColumns Parameters'''
-        self.params = {
-            'x_columns': x_columns,
-            'y_columns': y_columns,
-        }
+        """DropColumns Parameters"""
+        self.params = gen_params(locals())
         return self.params
+
 
 class TimeStepData(BaseBlock):
     def set_params(
@@ -119,9 +117,80 @@ class TimeStepData(BaseBlock):
         timestep: int,
         y_value_source: bool,
     ):
-        '''TimeStepData Parameters'''
-        self.params = {
-            "timestep": timestep,
-            "y_value_source": y_value_source,
-        }
+        """TimeStepData Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class FeatureSampleData(BaseBlock):
+    def set_params(
+        self,
+        dataset_url: str,
+        x_boundaries,
+        y_boundaries,
+    ):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ReshapeArray(BaseBlock):
+    def set_params(
+        self,
+        data,
+        dimensions,
+    ):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ScalarToNdarray(BaseBlock):
+    def set_params(
+        self,
+        scalar,
+        dimensions: int,
+    ):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ImageToNdarray(BaseBlock):
+    def set_params(self, image_url: str, targe_size, rescale=True):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class ColumnsAstype(BaseBlock):
+    def set_params(
+        self,
+        columns,
+        astype: str,
+    ):
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoDP(BaseBlock):
+    def set_params(
+        self,
+        x_slice,
+        y_slice,
+        strategy_value,
+        test_size_value,
+        le_thresh,
+        ohe_thresh,
+        save_name,
+        clean,
+        dataset_type,
+        load_name,
+    ):
+        self.params = gen_params(locals())
+
+        return self.params
+
+
+class TextVectorizer(BaseBlock):
+    def set_params(
+        self,
+    ):
+        self.params = {}
         return self.params
