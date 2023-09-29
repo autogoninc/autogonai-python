@@ -1,19 +1,4 @@
-from autogonai.development.base import BaseBlock
-
-
-def gen_params(arg_pairs):
-    # Create an empty dictionary to store the arguments
-    arguments_dict = {}
-
-    # Get all local variables (including function arguments) as a dictionary
-    local_variables = arg_pairs
-
-    # Iterate through the local variables and store the arguments in the dictionary
-    for key, value in local_variables.items():
-        if key != "self":  # Exclude 'self' if it's a method within a class
-            arguments_dict[key] = value
-
-    return arguments_dict
+from autogonai.development.base import BaseBlock, gen_params
 
 
 class InputData(BaseBlock):
@@ -54,6 +39,8 @@ class EncodeData(BaseBlock):
         y_index: int = 0,
         y_remainder: str | None = None,
         x_remainder: str | None = None,
+        save_name=None,
+        load_name=None,
     ):
         """EncodeData Parameters"""
         x_encode = True if not x_encoding_type == None else False
@@ -71,6 +58,8 @@ class EncodeData(BaseBlock):
                 "remainder": y_remainder,
                 "index": y_index,
             },
+            "save_name": save_name,
+            "load_name": load_name,
         }
         return self.params
 
@@ -82,21 +71,18 @@ class SplitData(BaseBlock):
         return self.params
 
 
-class FeatureScaleData(BaseBlock):
+class FeatureScaling(BaseBlock):
     def set_params(
         self,
         xtrain: bool,
         xtest: bool,
         x: bool,
-        boundaries: str,
+        boundariestoscale: str,
+        save_name,
+        load_name,
     ):
         """FeatureScaleData Parameters"""
-        self.params = {
-            "xtrain": xtrain,
-            "xtest": xtest,
-            "x": x,
-            "boundariestoscale": boundaries,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
@@ -190,7 +176,18 @@ class AutoDP(BaseBlock):
 
 class TextVectorizer(BaseBlock):
     def set_params(
-        self, vectorizer, boundariestoscale, dataset, xtrain, xtest, x, ytrain, ytest, y
+        self,
+        vectorizer,
+        boundariestoscale,
+        dataset,
+        xtrain,
+        xtest,
+        x,
+        ytrain,
+        ytest,
+        y,
+        save_name,
+        load_name,
     ):
         self.params = gen_params(locals())
         return self.params
@@ -259,13 +256,25 @@ class StatsCounts(BaseBlock):
 
 
 class PrincipalComponentAnalysis(BaseBlock):
-    def set_params(self, n_components, dataset, xtrain, xtest, x, ytrain, ytest, y):
+    def set_params(
+        self,
+        n_components,
+        dataset,
+        xtrain,
+        xtest,
+        x,
+        ytrain,
+        ytest,
+        y,
+        save_name,
+        load_name,
+    ):
         self.params = gen_params(locals())
         return self.params
 
 
 class Resampler(BaseBlock):
-    def set_params(self, xy, xy_train, xy_test, resampler, save_name):
+    def set_params(self, xy, xy_train, xy_test, resampler, save_name, load_name):
         self.params = gen_params(locals())
         return self.params
 
