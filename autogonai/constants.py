@@ -90,7 +90,11 @@ class function_codes:
 
     # Auto Machine Learning
     AutoRegression = "AUTO_R_1"
+    AutoRegressionPredict = "AUTO_R_1_P"
+    AutoRegressionMetrics = "AUTO_R_1_M"
     AutoClassification = "AUTO_CN_1"
+    AutoClassificationPredict = "AUTO_CN_1_P"
+    AutoClassificationMetrics = "AUTO_CN_1_M"
 
     # Deep Learning
     ArtificialNeuralNetworkInit = "DL_ANN_S_I"
