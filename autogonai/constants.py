@@ -1,9 +1,9 @@
 class function_codes:
     # Data Processing
-    InputData = "DP_1"
+    DataInput = "DP_1"
     HandleMissingData = "DP_2"
-    EncodeData = "DP_3"
-    SplitData = "DP_4"
+    DataEncoding = "DP_3"
+    DataSplitting = "DP_4"
     FeatureScaleData = "DP_5"
     DropColumns = "DP_6"  # "DP_DC"
     TimeStepData = "DP_7"  # "DP_TSP"

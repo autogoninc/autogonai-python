@@ -52,16 +52,16 @@ class Blocks:
                 return func(data)
 
         # Keeping this for user developement purposes
-        elif function_code == self.fc.InputData:
-            return self.dp.InputData(data)
+        elif function_code == self.fc.DataInput:
+            return self.dp.DataInput(data)
         elif function_code == self.fc.HandleMissingData:
             return self.dp.HandleMissingData(data)
-        elif function_code == self.fc.EncodeData:
-            return self.dp.EncodeData(data)
-        elif function_code == self.fc.SplitData:
-            return self.dp.SplitData(data)
+        elif function_code == self.fc.DataEncoding:
+            return self.dp.DataEncoding(data)
+        elif function_code == self.fc.DataSplitting:
+            return self.dp.DataSplitting(data)
         elif function_code == self.fc.FeatureScaleData:
-            return self.dp.FeatureScaleData(data)
+            return self.dp.FeatureScaling(data)
         elif function_code == self.fc.DropColumns:
             return self.dp.DropColumns(data)
         elif function_code == self.fc.TimeStepData:

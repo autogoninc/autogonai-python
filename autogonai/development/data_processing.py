@@ -1,7 +1,7 @@
 from autogonai.development.base import BaseBlock, gen_params
 
 
-class InputData(BaseBlock):
+class DataInput(BaseBlock):
     def set_params(
         self,
         file_type: str,
@@ -13,7 +13,7 @@ class InputData(BaseBlock):
         dbname: str = "",
         query: str = "",
     ):
-        """InputData Parameters"""
+        """DataInput Parameters"""
         self.params = gen_params(locals())
         return self.params
 
@@ -30,7 +30,7 @@ class HandleMissingData(BaseBlock):
         return self.params
 
 
-class EncodeData(BaseBlock):
+class DataEncoding(BaseBlock):
     def set_params(
         self,
         x_encoding_type: str = None,
@@ -42,7 +42,7 @@ class EncodeData(BaseBlock):
         save_name=None,
         load_name=None,
     ):
-        """EncodeData Parameters"""
+        """DataEncoding Parameters"""
         x_encode = True if not x_encoding_type == None else False
         y_encode = True if not y_encoding_type == None else False
         self.params = {
@@ -64,9 +64,9 @@ class EncodeData(BaseBlock):
         return self.params
 
 
-class SplitData(BaseBlock):
+class DataSplitting(BaseBlock):
     def set_params(self, test_size: float, random_state: int | None = None):
-        """SplitData Parameters"""
+        """DataSplitting Parameters"""
         self.params = gen_params(locals())
         return self.params
 

@@ -46,87 +46,110 @@ class SelfOrganizingMapsTrain(BaseBlock):
 class SelfOrganizingMapsPredict(BaseBlock):
     def set_params(self, test_data: str, row: int):
         """SelfOrganizingMapsPredict Parameters"""
-        self.params = {"test_data": test_data, "row": row}
+        self.params = gen_params(locals())
         return self.params
 
 
 class RestrictedBoltzmannMachineInit(BaseBlock):
     def set_params(self, hyp_params: dict):
         """RestrictedBoltzmannMachineInit Parameters"""
-        self.params = {"hyp_params": hyp_params, "flowjson": []}
+        self.params = gen_params(locals())
         return self.params
 
 
 class RestrictedBoltzmannMachineTrain(BaseBlock):
     def set_params(self, model_name: str, hyp_params: dict):
         """RestrictedBoltzmannMachineTrain Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "hyp_params": hyp_params,
-            "flowjson": [],
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
 class RestrictedBoltzmannMachineTransform(BaseBlock):
     def set_params(self, test_data: str):
         """RestrictedBoltzmannMachineTransform Parameters"""
-        self.params = {"test_data": test_data}
+        self.params = gen_params(locals())
         return self.params
 
 
 class AutoImageClassifierInit(BaseBlock):
-    def set_params(self, max_trials: int):
+    def set_params(self, hyp_params: dict):
         """AutoImageClassifierInit Parameters"""
-        self.params = {"max_trials": max_trials, "flowjson": []}
+        self.params = gen_params(locals())
         return self.params
 
 
 class AutoImageClassifierTrain(BaseBlock):
-    def set_params(self, train_data_block: int, model_name: str, hyp_params: dict):
+    def set_params(self, model_name: str, hyp_params: dict):
         """AutoImageClassifierTrain Parameters"""
-        self.params = {
-            "train_data_block": train_data_block,
-            "model_name": model_name,
-            "hyp_params": hyp_params,
-            "flowjson": [],
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
 class AutoTextClassifierInit(BaseBlock):
-    def set_params(self, max_trials: int):
+    def set_params(self, hyp_params: dict):
         """AutoTextClassifierInit Parameters"""
-        self.params = {"max_trials": max_trials, "flowjson": []}
+        self.params = gen_params(locals())
         return self.params
 
 
 class AutoTextClassifierTrain(BaseBlock):
-    def set_params(self, train_data_block: int, model_name: str, hyp_params: dict):
+    def set_params(self, model_name: str, hyp_params: dict):
         """AutoTextClassifierTrain Parameters"""
-        self.params = {
-            "train_data_block": train_data_block,
-            "model_name": model_name,
-            "hyp_params": hyp_params,
-            "flowjson": [],
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
 class AutoStructuredDataClassifierInit(BaseBlock):
-    def set_params(self, max_trials: int):
+    def set_params(self, hyp_params: dict):
         """AutoStructuredDataClassifierInit Parameters"""
-        self.params = {"max_trials": max_trials, "flowjson": []}
+        self.params = gen_params(locals())
         return self.params
 
 
 class AutoStructuredDataClassifierTrain(BaseBlock):
-    def set_params(self, train_data_block: int, model_name: str, hyp_params: dict):
+    def set_params(self, model_name: str, hyp_params: dict):
         """AutoStructuredDataClassifierTrain Parameters"""
-        self.params = {
-            "train_data_block": train_data_block,
-            "model_name": model_name,
-            "hyp_params": hyp_params,
-            "flowjson": [],
-        }
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoImageRegressorInit(BaseBlock):
+    def set_params(self, hyp_params: dict):
+        """AutoImageRegressorInit Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoImageRegressorTrain(BaseBlock):
+    def set_params(self, model_name: str, hyp_params: dict):
+        """AutoImageRegressorTrain Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoTextRegressorInit(BaseBlock):
+    def set_params(self, hyp_params: dict):
+        """AutoTextRegressorInit Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoTextRegressorTrain(BaseBlock):
+    def set_params(self, model_name: str, hyp_params: dict):
+        """AutoTextRegressorTrain Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoStructuredDataRegressorInit(BaseBlock):
+    def set_params(self, hyp_params: dict):
+        """AutoStructuredDataRegressorInit Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class AutoStructuredDataRegressorTrain(BaseBlock):
+    def set_params(self, model_name: str, hyp_params: dict):
+        """AutoStructuredDataRegressorTrain Parameters"""
+        self.params = gen_params(locals())
         return self.params
