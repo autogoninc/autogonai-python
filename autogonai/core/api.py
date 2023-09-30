@@ -1,5 +1,4 @@
-import requests
-from collections import UserDict
+from .qore import *
 
 
 class Projects:
@@ -176,7 +175,9 @@ class Datasets:
             dict: Dataset details.
         """
         body = {"name": name, "description": description, "dataset_url": dataset_url}
-        response = self.client.send_request(self.endpoint, body, method="post")
+        response = self.client.send_request(
+            self.endpoint, json_data=body, method="post"
+        )
         return response
 
     def update(self, id, name: str, description: str) -> dict:
@@ -192,7 +193,7 @@ class Datasets:
         """
         body = {"dataset_name": name, "description": description}
         response = self.client.send_request(
-            self.endpoint + str(id), body, method="post"
+            self.endpoint + str(id), json_data=body, method="post"
         )
         return response
 
@@ -233,7 +234,7 @@ class ProductionPipelines:
         """
         body = {"data": data}
         response = self.client.send_request(
-            self.endpoint + "generate/", body, method="post"
+            self.endpoint + "generate/", json_data=body, method="post"
         )
         return response
 
@@ -249,6 +250,19 @@ class ProductionPipelines:
         """
         body = {"flow_id": flow_id, "test_data": test_data}
         response = self.client.send_request(
-            self.endpoint + "production/", body, method="post"
+            self.endpoint + "production/", json_data=body, method="post"
         )
         return response
+
+
+class Qore:
+    def __init__(self, client: any):
+        """Initializes the ProductionPipelines class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+
+        self.VisionAI = Vision
+        self.NaturalLanguageAI = NaturalLanguage
