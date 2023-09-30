@@ -11,7 +11,7 @@ class Vision:
         """
         self.client = client
 
-    def text_detection(self, image) -> dict:
+    def create(self, image) -> dict:
         body = {"image": image, "operation": "text_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
@@ -117,9 +117,92 @@ class NaturalLanguage:
         """
         self.client = client
 
-    def text_detection(self, image) -> dict:
-        body = {"image": image, "operation": "text_detection"}
+    def sentiment_analysis(self, text) -> dict:
+        body = {"text": text}
         response = self.client.send_request(
-            self.endpoint + "vision-ai/", form_data=body, method="post"
+            self.endpoint + "sentiment-analysis/", json_data=body, method="post"
+        )
+        return response
+
+    def text_to_speech(self, text, language_code) -> dict:
+        body = {"text": text, "language_code": language_code}
+        response = self.client.send_request(
+            self.endpoint + "text-to-speech/", json_data=body, method="post"
+        )
+        return response
+
+    def speech_to_text(self, audio, language_code) -> dict:
+        body = {"audio": audio, "language_code": language_code}
+        response = self.client.send_request(
+            self.endpoint + "speech-to-text/", form_data=body, method="post"
+        )
+        return response
+
+    def text_summary(self, text, max_length, min_length) -> dict:
+        body = {"text": text, "max_length": max_length, "min_length": min_length}
+        response = self.client.send_request(
+            self.endpoint + "text-summary/", json_data=body, method="post"
+        )
+        return response
+
+    def ask_your_data(self, data, prompt) -> dict:
+        body = {"data": data, "prompt": prompt}
+        response = self.client.send_request(
+            self.endpoint + "ask-your-data/", json_data=body, method="post"
+        )
+        return response
+
+    def chatgpt(self, message) -> dict:
+        body = {"message": message}
+        response = self.client.send_request(
+            self.endpoint + "chat/", json_data=body, method="post"
+        )
+        return response
+
+    def text_classification(self, text) -> dict:
+        body = {"text": text}
+        response = self.client.send_request(
+            self.endpoint + "text-classification/", json_data=body, method="post"
+        )
+        return response
+
+
+class Voice:
+    """Handles operations related to Autogon Qore."""
+
+    endpoint = "services/"
+
+    def __init__(self, client: any):
+        """Initializes the ProductionPipelines class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+
+    def create_voice(self, voice_name, voice_description, audio) -> dict:
+        body = {
+            "voice_name": voice_name,
+            "voice_description": voice_description,
+            "audio": audio,
+        }
+        response = self.client.send_request(
+            self.endpoint + "voice-cloning/voices/", form_data=body, method="post"
+        )
+        return response
+
+    def get_voices(self) -> dict:
+        response = self.client.send_request(
+            self.endpoint + "voice-cloning/voices/list/", method="get"
+        )
+        return response
+
+    def text_to_speech(self, voice_id, text) -> dict:
+        body = {
+            "voice_id": voice_id,
+            "text": text,
+        }
+        response = self.client.send_request(
+            self.endpoint + "voice-cloning/tts/", form_data=body, method="post"
         )
         return response
