@@ -18,13 +18,13 @@ class Blocks:
     def new(  # Slower structure to implemnt
         self,
         function_code: str,
-        project: int,
+        project_id: int,
         id: int,
         parent: int = 0,
     ):
         data = {
             "client": self.client,
-            "project_id": project,
+            "project_id": project_id,
             "parent_id": parent,
             "block_id": id,
             "function_code": function_code,
