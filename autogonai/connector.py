@@ -36,6 +36,10 @@ class API:
             response = requests.post(url, headers=test_header, json=payload)
         elif method.lower() == "get":
             response = requests.get(url, headers=test_header)
+        elif method.lower() == "patch":
+            response = requests.patch(url, headers=test_header)
+        elif method.lower() == "put":
+            response = requests.put(url, headers=test_header, json=payload)
         elif method.lower() == "delete":
             response = requests.delete(url, headers=test_header)
 

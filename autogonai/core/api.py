@@ -90,29 +90,52 @@ class Project(int):
 class StateManagements:
     """Handles all StateManagement Specific operations"""
 
+    endpoint = "engine/statemanagement/"
+
     def __init__(self, client):
         self.client = client
 
-    def get(self):
-        pass
+    def get(self, id: int):
+        response = self.client.send_request(self.endpoint + id, method="get")
+        return response
 
-    def create():
-        pass
+    def list(self):
+        response = self.client.send_request(self.endpoint, method="get")
+        return response
 
-    def delete(self):
-        pass
+    def delete(self, id: int):
+        response = self.client.send_request(self.endpoint + id, method="delete")
+        return response
 
 
 # Define a class named 'Datasets' for dataset operations
 class Datasets:
+    endpoint = "engine/dataset/"
+
     def __init__(self, client):
         self.client = client
 
-    def get(self):
-        pass
+    def get(self, id):
+        response = self.client.send_request(self.endpoint + id, method="get")
+        return response
 
-    def create():
-        pass
+    def list(self):
+        response = self.client.send_request(self.endpoint, method="get")
+        return response
 
-    def delete(self):
-        pass
+    def create(self, name, description, dataset_url):
+        body = {"name": name, "description": description, "dataset_url": dataset_url}
+        response = self.client.send_request(self.endpoint, body, method="post")
+        return response
+
+    def update(self, id, name, description):
+        body = {
+            "dataset_name": name,
+            "description": description,
+        }
+        response = self.client.send_request(self.endpoint + id, body, method="post")
+        return response
+
+    def delete(self, id):
+        response = self.client.send_request(self.endpoint + id, method="delete")
+        return response
