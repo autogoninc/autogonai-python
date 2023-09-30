@@ -6,6 +6,7 @@ class Blocks:
     import autogonai.development.auto_deep_learning as adl
 
     from autogonai.constants import function_codes as fc
+    from autogonai.development.base import BaseBlock
 
     endpoint = "engine/start"
 
@@ -21,7 +22,7 @@ class Blocks:
         project_id: int,
         id: int,
         parent: int = 0,
-    ):
+    ) -> BaseBlock:
         data = {
             "client": self.client,
             "project_id": project_id,
@@ -44,7 +45,7 @@ class Blocks:
             elif function_code.startswith("DL"):
                 func = getattr(self.dl, function_name)
                 return func(data)
-            elif function_code.startswith("A_ML"):
+            elif function_code.startswith("AUTO"):
                 func = getattr(self.aml, function_name)
                 return func(data)
             elif function_code.startswith("A_DL"):
