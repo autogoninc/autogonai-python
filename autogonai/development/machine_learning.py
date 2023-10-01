@@ -1,74 +1,93 @@
-from autogonai.development.base import BaseBlock
+from autogonai.development.base import BaseBlock, gen_params
+
+
+class PredictBlock(BaseBlock):
+    def set_params(self, model_name: str, test_data: str):
+        """SimpleLinearRegressionPredict Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class MetricsBlock(BaseBlock):
+    def set_params(self, model_name: str, metric: str):
+        """SimpleLinearRegressionPredict Parameters"""
+        self.params = gen_params(locals())
+        return self.params
 
 
 class SimpleLinearRegression(BaseBlock):
     def set_params(self, model_name: str):
         """SimpleLinearRegression Parameters"""
-        self.params = {"model_name": model_name}
+        self.params = gen_params(locals())
         return self.params
 
 
-class SimpleLinearRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """SimpleLinearRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class SimpleLinearRegressionPredict(PredictBlock):
+    pass
+
+
+class SimpleLinearRegressionMetrics(MetricsBlock):
+    pass
 
 
 class MultipleLinearRegression(BaseBlock):
     def set_params(self, model_name: str):
-        """MultipleLinearRegression Parameters"""
-        self.params = {"model_name": model_name}
+        """SimpleLinearRegression Parameters"""
+        self.params = gen_params(locals())
         return self.params
 
 
-class MultipleLinearRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """MultipleLinearRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class MultipleLinearRegressionPredict(PredictBlock):
+    pass
+
+
+class MultipleLinearRegressionMetrics(MetricsBlock):
+    pass
 
 
 class PolynomialLinearRegression(BaseBlock):
     def set_params(self, model_name: str, degree: int = 2):
         """PolynomialLinearRegression Parameters"""
-        self.params = {"model_name": model_name, "degree": degree}
+        self.params = gen_params(locals())
         return self.params
 
 
-class PolynomialLinearRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """PolynomialLinearRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class PolynomialLinearRegressionPredict(PredictBlock):
+    pass
+
+
+class PolynomialLinearRegressionMetrics(MetricsBlock):
+    pass
 
 
 class SupportVectorRegression(BaseBlock):
     def set_params(self, model_name: str, kernel: str = "rbf"):
         """SupportVectorRegression Parameters"""
-        self.params = {"model_name": model_name, "kernel": kernel}
+        self.params = gen_params(locals())
         return self.params
 
 
-class SupportVectorRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """SupportVectorRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class SupportVectorRegressionPredict(PredictBlock):
+    pass
+
+
+class SupportVectorRegressionMetrics(MetricsBlock):
+    pass
 
 
 class DecisionTreeRegression(BaseBlock):
     def set_params(self, model_name: str, random_state: int = 0):
         """DecisionTreeRegression Parameters"""
-        self.params = {"model_name": model_name, "random_state": random_state}
+        self.params = gen_params(locals())
         return self.params
 
 
-class DecisionTreeRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """DecisionTreeRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class DecisionTreeRegressionPredict(PredictBlock):
+    pass
+
+
+class DecisionTreeRegressionMetrics(MetricsBlock):
+    pass
 
 
 class RandomForestRegression(BaseBlock):
@@ -76,33 +95,31 @@ class RandomForestRegression(BaseBlock):
         self, model_name: str, n_estimators: int = 100, random_state: int = 0
     ):
         """RandomForestRegression Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "n_estimators": n_estimators,
-            "random_state": random_state,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class RandomForestRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """RandomForestRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class RandomForestRegressionPredict(PredictBlock):
+    pass
+
+
+class RandomForestRegressionMetrics(MetricsBlock):
+    pass
 
 
 class LogisticRegression(BaseBlock):
     def set_params(self, model_name: str, random_state: int = 0):
         """LogisticRegression Parameters"""
-        self.params = {"model_name": model_name, "random_state": random_state}
+        self.params = gen_params(locals())
         return self.params
 
 
-class LogisticRegressionPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """LogisticRegressionPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class LogisticRegressionPredict(PredictBlock):
+    pass
+
+
+class LogisticRegressionMetrics(MetricsBlock):
+    pass
 
 
 class KNearestNeighbors(BaseBlock):
@@ -115,67 +132,61 @@ class KNearestNeighbors(BaseBlock):
         random_state: int = 0,
     ):
         """KNearestNeighbors Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "n_neighbors": n_neighbors,
-            "distance": distance,
-            "p": p,
-            "random_state": random_state,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class KNearestNeighborsPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """KNearestNeighborsPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class KNearestNeighborsPredict(PredictBlock):
+    pass
+
+
+class KNearestNeighborsMetrics(MetricsBlock):
+    pass
 
 
 class SupportVectorMachine(BaseBlock):
     def set_params(self, model_name: str):
         """SupportVectorMachine Parameters"""
-        self.params = {"model_name": model_name}
+        self.params = gen_params(locals())
         return self.params
 
 
-class SupportVectorMachinePredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """SupportVectorMachinePredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class SupportVectorMachinePredict(PredictBlock):
+    pass
+
+
+class SupportVectorMachineMetrics(MetricsBlock):
+    pass
 
 
 class KernelSupportVectorMachine(BaseBlock):
     def set_params(self, model_name: str, kernel: str = "rbf", random_state: int = 0):
         """KernelSupportVectorMachine Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "kernel": kernel,
-            "random_state": random_state,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class KernelSupportVectorMachinePredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """KernelSupportVectorMachinePredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class KernelSupportVectorMachinePredict(PredictBlock):
+    pass
+
+
+class KernelSupportVectorMachineMetrics(MetricsBlock):
+    pass
 
 
 class NaiveBayes(BaseBlock):
     def set_params(self, model_name: str):
         """NaiveBayes Parameters"""
-        self.params = {"model_name": model_name}
+        self.params = gen_params(locals())
         return self.params
 
 
-class NaiveBayesPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """NaiveBayesPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class NaiveBayesPredict(PredictBlock):
+    pass
+
+
+class NaiveBayesMetrics(MetricsBlock):
+    pass
 
 
 class DecisionTreeClassification(BaseBlock):
@@ -183,35 +194,31 @@ class DecisionTreeClassification(BaseBlock):
         self, model_name: str, criterion: str = "gini", random_state: int = 0
     ):
         """DecisionTreeClassification Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "criterion": criterion,
-            "random_state": random_state,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class DecisionTreeClassificationPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """DecisionTreeClassificationPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class DecisionTreeClassificationPredict(PredictBlock):
+    pass
+
+
+class DecisionTreeClassificationMetrics(MetricsBlock):
+    pass
 
 
 class RandomForestClassification(BaseBlock):
     def set_params(self, model_name: str):
         """RandomForestClassification Parameters"""
-        self.params = {
-            "model_name": model_name,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class RandomForestClassificationPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """RandomForestClassificationPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class RandomForestClassificationPredict(PredictBlock):
+    pass
+
+
+class RandomForestClassificationMetrics(MetricsBlock):
+    pass
 
 
 class HierarchicalClustering(BaseBlock):
@@ -223,20 +230,16 @@ class HierarchicalClustering(BaseBlock):
         linkage: str = "ward",
     ):
         """HierarchichalClustering Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "n_clusters": n_clusters,
-            "affinity": affinity,
-            "linkage": linkage,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class HierarchicalClusteringPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """HierarchichalClusteringPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class HierarchicalClusteringPredict(PredictBlock):
+    pass
+
+
+class HierarchicalClusteringMetrics(MetricsBlock):
+    pass
 
 
 class KMeansClustering(BaseBlock):
@@ -248,20 +251,16 @@ class KMeansClustering(BaseBlock):
         random_state: int = 0,
     ):
         """KMeansClustering Parameters"""
-        self.params = {
-            "model_name": model_name,
-            "n_clusters": n_clusters,
-            "init": init,
-            "random_state": random_state,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class KMeansClusteringPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """KMeansClusteringPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
-        return self.params
+class KMeansClusteringPredict(PredictBlock):
+    pass
+
+
+class KMeansClusteringMetrics(MetricsBlock):
+    pass
 
 
 class XGBoost(BaseBlock):
@@ -270,14 +269,64 @@ class XGBoost(BaseBlock):
         model_name: str,
     ):
         """XGBoost Parameters"""
-        self.params = {
-            "model_name": model_name,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
-class XGBoostPredict(BaseBlock):
-    def set_params(self, model_name: str, test_data: str):
-        """XGBoostPredict Parameters"""
-        self.params = {"model_name": model_name, "test_data": test_data}
+class XGBoostPredict(PredictBlock):
+    pass
+
+
+class XGBoostMetrics(MetricsBlock):
+    pass
+
+
+class GridSearch(BaseBlock):
+    def set_params(
+        self,
+        model_name: str,
+        param_grid: list,
+    ):
+        """GridSearch Parameters"""
+        self.params = gen_params(locals())
         return self.params
+
+
+class SHAPExplain(BaseBlock):
+    def set_params(
+        self,
+        model_name: str,
+    ):
+        """SHAPExplain Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class IsolationForest(BaseBlock):
+    def set_params(
+        self,
+        model_name: str,
+        random_state: int,
+    ):
+        """IsolationForest Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class IsolationForestPredict(PredictBlock):
+    pass
+
+
+class IsolationForestMetrics(MetricsBlock):
+    pass
+
+
+class DBScanClustering(BaseBlock):
+    def set_params(self, eps, min_samples, metric):
+        """DBScanClustering Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class DBScanClusteringPredict(PredictBlock):
+    pass

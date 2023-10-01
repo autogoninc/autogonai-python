@@ -1,10 +1,12 @@
 class Blocks:
     import autogonai.development.data_processing as dp
     import autogonai.development.machine_learning as ml
+    import autogonai.development.auto_machine_learning as aml
     import autogonai.development.deep_learning as dl
-    
-    
+    import autogonai.development.auto_deep_learning as adl
+
     from autogonai.constants import function_codes as fc
+    from autogonai.development.base import BaseBlock
 
     endpoint = "engine/start"
 
@@ -14,37 +16,58 @@ class Blocks:
     def get(self):
         pass
 
-    def new( # Slower structure to implemnt
+    def new(  # Slower structure to implemnt
         self,
         function_code: str,
-        project: int,
+        project_id: int,
         id: int,
         parent: int = 0,
-    ):
-
+    ) -> BaseBlock:
         data = {
             "client": self.client,
-            "project_id": project,
+            "project_id": project_id,
             "parent_id": parent,
             "block_id": id,
             "function_code": function_code,
         }
 
-        if function_code == self.fc.InputData:
-            return self.dp.InputData(data)
+        functions = vars(self.fc)
+
+        # Main functions finder
+        if function_code in functions.values():
+            function_name = [k for k, v in functions.items() if v == function_code][0]
+            if function_code.startswith("DP"):
+                func = getattr(self.dp, function_name)
+                return func(data)
+            elif function_code.startswith("ML"):
+                func = getattr(self.ml, function_name)
+                return func(data)
+            elif function_code.startswith("DL"):
+                func = getattr(self.dl, function_name)
+                return func(data)
+            elif function_code.startswith("AUTO"):
+                func = getattr(self.aml, function_name)
+                return func(data)
+            elif function_code.startswith("A_DL"):
+                func = getattr(self.adl, function_name)
+                return func(data)
+
+        # Keeping this for user developement purposes
+        elif function_code == self.fc.DataInput:
+            return self.dp.DataInput(data)
         elif function_code == self.fc.HandleMissingData:
             return self.dp.HandleMissingData(data)
-        elif function_code == self.fc.EncodeData:
-            return self.dp.EncodeData(data)
-        elif function_code == self.fc.SplitData:
-            return self.dp.SplitData(data)
+        elif function_code == self.fc.DataEncoding:
+            return self.dp.DataEncoding(data)
+        elif function_code == self.fc.DataSplitting:
+            return self.dp.DataSplitting(data)
         elif function_code == self.fc.FeatureScaleData:
-            return self.dp.FeatureScaleData(data)
+            return self.dp.FeatureScaling(data)
         elif function_code == self.fc.DropColumns:
             return self.dp.DropColumns(data)
         elif function_code == self.fc.TimeStepData:
             return self.dp.TimeStepData(data)
-        
+
         elif function_code == self.fc.SimpleLinearRegression:
             return self.ml.SimpleLinearRegression(data)
         elif function_code == self.fc.SimpleLinearRegressionPredict:
@@ -109,8 +132,7 @@ class Blocks:
             return self.ml.XGBoost(data)
         elif function_code == self.fc.XGBoostPredict:
             return self.ml.XGBoostPredict(data)
-        
-        
+
         elif function_code == self.fc.ArtificialNeuralNetworkInit:
             return self.dl.ArtificialNeuralNetworkInit(data)
         elif function_code == self.fc.ArtificialNeuralNetworkTrain:
@@ -131,6 +153,3 @@ class Blocks:
             return self.dl.RestrictedBoltzmannMachineTrain(data)
         elif function_code == self.fc.RestrictedBoltzmannMachineTransform:
             return self.dl.RestrictedBoltzmannMachineTransform(data)
-        
-        
-    # def InputData(self): return dp.InputData(self.client)
