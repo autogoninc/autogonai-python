@@ -3,10 +3,7 @@ import json
 import requests
 from .errors import AutogonRequestError, AutogonServerError
 
-# Define a test header with an authorization token
 
-
-# Define a class named 'API'
 class API:
     def __init__(
         self,
@@ -82,5 +79,7 @@ class API:
 
         if data.get("status") in ["false", False]:
             raise AutogonRequestError(response.status_code, data["message"])
+
+        print(data)
 
         return data

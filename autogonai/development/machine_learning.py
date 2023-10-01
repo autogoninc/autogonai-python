@@ -30,7 +30,18 @@ class SimpleLinearRegressionMetrics(MetricsBlock):
     pass
 
 
-class MultipleLinearRegression(PredictBlock):
+class MultipleLinearRegression(BaseBlock):
+    def set_params(self, model_name: str):
+        """SimpleLinearRegression Parameters"""
+        self.params = gen_params(locals())
+        return self.params
+
+
+class MultipleLinearRegressionPredict(PredictBlock):
+    pass
+
+
+class MultipleLinearRegressionMetrics(MetricsBlock):
     pass
 
 
