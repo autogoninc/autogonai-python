@@ -4,17 +4,19 @@ from autogonai.development.base import BaseBlock, gen_params
 class DataInput(BaseBlock):
     def set_params(
         self,
-        file_type: str,
-        dburl: str,
-        x_boundaries: str,
-        y_boundaries: str,
-        dbservertype: str = "",
-        dbpassword: str = "",
-        dbname: str = "",
-        query: str = "",
+        #file_type: str,
+        #dburl: str,
+        #x_boundaries: str,
+        #y_boundaries: str,
+        #dbservertype: str = "",
+        #dbpassword: str = "",
+        #dbname: str = "",
+        #query: str = "",
+        **kwargs
     ):
         """DataInput Parameters"""
-        self.params = gen_params(locals())
+        #self.params = gen_params(locals())
+        self.params = kwargs
         return self.params
 
 
@@ -22,8 +24,7 @@ class HandleMissingData(BaseBlock):
     def set_params(
         self,
         strategy_value: str,
-        x_boundaries: str | None,
-        y_boundaries: str | None,
+        boundaries: str | None,
     ):
         """HandleMissingData Parameters"""
         self.params = gen_params(locals())
@@ -33,34 +34,14 @@ class HandleMissingData(BaseBlock):
 class DataEncoding(BaseBlock):
     def set_params(
         self,
-        x_encoding_type: str = None,
-        x_index: int = 0,
-        y_encoding_type: str = None,
-        y_index: int = 0,
-        y_remainder: str | None = None,
-        x_remainder: str | None = None,
+        dataset = None,
+        x_value = None,
+        y_value = None,
         save_name=None,
         load_name=None,
     ):
         """DataEncoding Parameters"""
-        x_encode = True if not x_encoding_type == None else False
-        y_encode = True if not y_encoding_type == None else False
-        self.params = {
-            "xvalue": {
-                "encode": x_encode,
-                "encoding_type": x_encoding_type,
-                "remainder": x_remainder,
-                "index": x_index,
-            },
-            "yvalue": {
-                "encode": y_encode,
-                "encoding_type": y_encoding_type,
-                "remainder": y_remainder,
-                "index": y_index,
-            },
-            "save_name": save_name,
-            "load_name": load_name,
-        }
+        self.params = gen_params(locals())
         return self.params
 
 
@@ -74,9 +55,13 @@ class DataSplitting(BaseBlock):
 class FeatureScaling(BaseBlock):
     def set_params(
         self,
+        dataset: bool,
         xtrain: bool,
         xtest: bool,
         x: bool,
+        ytrain: bool,
+        ytest: bool,
+        y: bool,
         boundariestoscale: str,
         save_name,
         load_name,
@@ -89,6 +74,7 @@ class FeatureScaling(BaseBlock):
 class DropColumns(BaseBlock):
     def set_params(
         self,
+        d_columns: list | None,
         x_columns: list | None,
         y_columns: list | None,
     ):
@@ -100,8 +86,9 @@ class DropColumns(BaseBlock):
 class TimeStepData(BaseBlock):
     def set_params(
         self,
-        timestep: int,
-        y_value_source: bool,
+        lookback: int,
+        lookforward: int,
+        index: int
     ):
         """TimeStepData Parameters"""
         self.params = gen_params(locals())
