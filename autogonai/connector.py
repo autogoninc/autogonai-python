@@ -73,6 +73,13 @@ class API:
         except ValueError:
             data = response.text
 
+        if type(data) == str:
+            # print(data)
+            raise AutogonServerError(response.status_code, data)
+
+        if data.get("status") == "false":
+            raise AutogonRequestError(response.status_code, data["message"])
+
         # Check the response data for errors and raise exceptions if necessary
         if type(data) == str:
             raise AutogonServerError(response.status_code, data)
