@@ -1,3 +1,8 @@
+import requests
+import base64
+from io import BytesIO
+
+
 class Vision:
     """Handles vision operations related to Autogon Qore."""
 
@@ -11,7 +16,16 @@ class Vision:
         """
         self.client = client
 
-    def create(self, image) -> dict:
+    def _process_image_to_bytes(self, img_str: str):
+        """Processes images to BytesIO objects which can be loaded by the PIL library"""
+
+        if len(img_str) > 400:
+            return BytesIO(base64.b64decode(img_str.encode("utf-8")))
+        else:
+            response = requests.get(img_str)
+            return BytesIO(response.content)
+
+    def text_detection(self, image) -> dict:
         body = {"image": image, "operation": "text_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
@@ -65,6 +79,7 @@ class Vision:
         response = self.client.send_request(
             self.endpoint + "image-generation/", form_data=body, method="post"
         )
+        response["image"] = self._process_image_to_bytes(response["image"])
         return response
 
     def stable_diffusion(self, text) -> dict:

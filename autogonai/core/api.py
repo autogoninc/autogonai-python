@@ -264,5 +264,6 @@ class Qore:
         """
         self.client = client
 
-        self.VisionAI = Vision
-        self.NaturalLanguageAI = NaturalLanguage
+        self.VisionAI = Vision(client)
+        self.NaturalLanguageAI = NaturalLanguage(client)
+        self.Voice = Voice(client)

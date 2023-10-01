@@ -24,3 +24,4 @@ class Client(API):
         self.Datasets = Datasets(self)
         self.Blocks = Blocks(self)
         self.ProductionPipelines = ProductionPipelines(self)
+        self.Qore = Qore(self)
