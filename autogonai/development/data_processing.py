@@ -64,8 +64,8 @@ class DataEncoding(BaseBlock):
     def set_params(
         self,
         dataset={"encode": False},
-        x_value={"encode": False},
-        y_value={"encode": False},
+        xvalue={"encode": False},
+        yvalue={"encode": False},
         save_name=None,
         load_name=None,
     ):
@@ -74,8 +74,8 @@ class DataEncoding(BaseBlock):
 
         Args:
             dataset (dict): Encoding Parameters for dataset variable
-            x_value (dict): Encoding Parameters for x variable
-            y_value (dict): Encoding Parameters for y variable
+            xvalue (dict): Encoding Parameters for x variable
+            yvalue (dict): Encoding Parameters for y variable
             save_name (optional): Save name for encoded data. Defaults to None.
             load_name (optional): Load name for encoded data. Defaults to None.
 

@@ -80,6 +80,4 @@ class API:
         if data.get("status") in ["false", False]:
             raise AutogonRequestError(response.status_code, data["message"])
 
-        print(data)
-
         return data
