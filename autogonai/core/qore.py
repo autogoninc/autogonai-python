@@ -9,7 +9,7 @@ class Vision:
     endpoint = "services/"
 
     def __init__(self, client: any):
-        """Initializes the ProductionPipelines class.
+        """Initializes the Production class.
 
         Args:
             client (any): The client object for making requests.
@@ -125,7 +125,7 @@ class NaturalLanguage:
     endpoint = "services/"
 
     def __init__(self, client: any):
-        """Initializes the ProductionPipelines class.
+        """Initializes the Production class.
 
         Args:
             client (any): The client object for making requests.
@@ -188,7 +188,7 @@ class Voice:
     endpoint = "services/"
 
     def __init__(self, client: any):
-        """Initializes the ProductionPipelines class.
+        """Initializes the Production class.
 
         Args:
             client (any): The client object for making requests.
