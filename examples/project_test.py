@@ -1,23 +1,17 @@
 import os
+
 from dotenv import load_dotenv
 
-from autogonai.core import Client
 from autogonai.constants import function_codes as fc
+from autogonai.core import Client
 
 load_dotenv()
 
 API_KEY = os.environ.get("API_KEY")
-print("API KEY:", API_KEY)
 
 client = Client(api_key=API_KEY)
 
-# project = client.Projects.create(
-#         name="Vheed's pylib 5",
-#         description="A project, just for testing the python library",
-#     )
-project = client.Projects.get("fc217b81-e951-4ffd-a722-db00d23610e5")
-
-print("Project id:", project["id"], "| app_id:", project["app_id"], "\n")
+project = client.Projects.create("Test Name", "Test Description")
 
 print("Inputting data")
 
