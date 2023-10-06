@@ -16,14 +16,16 @@ class Vision:
         """
         self.client = client
 
-    def _process_image_to_bytes(self, img_str: str):
+    @staticmethod
+    def _process_image_to_bytes(img_str: str):
         """Processes images to BytesIO objects which can be loaded by the PIL library"""
+        return BytesIO(base64.b64decode(img_str.encode("utf-8")))
 
-        if len(img_str) > 400:
-            return BytesIO(base64.b64decode(img_str.encode("utf-8")))
-        else:
-            response = requests.get(img_str)
-            return BytesIO(response.content)
+    @staticmethod
+    def _download_image(img_url: str):
+        """Downloads image from a url and processes it to bytes"""
+        response = requests.get(img_url)
+        return BytesIO(response.content)
 
     def text_detection(self, image) -> dict:
         body = {"image": image, "operation": "text_detection"}
