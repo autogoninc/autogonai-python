@@ -210,13 +210,13 @@ class Datasets:
         return response
 
 
-class ProductionPipelines:
+class Production:
     """Handles operations related to production pipelines."""
 
     endpoint = "models/"
 
     def __init__(self, client: any):
-        """Initializes the ProductionPipelines class.
+        """Initializes the Production class.
 
         Args:
             client (any): The client object for making requests.
@@ -238,17 +238,17 @@ class ProductionPipelines:
         )
         return response
 
-    def run_pipeline(self, flow_id, test_data: dict) -> dict:
+    def run_pipeline(self, flow_id, data: dict) -> dict:
         """Runs a production pipeline with the given flow ID and test data.
 
         Args:
             flow_id: ID of the flow to run.
-            test_data (dict): Test data for the pipeline.
+            data (dict): Test data for the pipeline.
 
         Returns:
             dict: Results of the production pipeline run.
         """
-        body = {"flow_id": flow_id, "test_data": test_data}
+        body = {"flow_id": flow_id, "data": data}
         response = self.client.send_request(
             self.endpoint + "production/", json_data=body, method="post"
         )
@@ -257,7 +257,7 @@ class ProductionPipelines:
 
 class Qore:
     def __init__(self, client: any):
-        """Initializes the ProductionPipelines class.
+        """Initializes the Production class.
 
         Args:
             client (any): The client object for making requests.

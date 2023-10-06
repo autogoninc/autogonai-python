@@ -114,6 +114,16 @@ response = ann_train.run()
 
 This is just a basic example to demonstrate how to use the AutogonAI Python library. You can customize it to suit your specific machine learning project requirements.
 
+### Production Pipelines
+
+You can also use the AutogonAI Python library to make pipeline predictions in production. Here's an example of how to call a production machine learning predict pipeline:
+
+```python
+response = client.Production.run_pipeline(
+    flow_id="fl-sy3bgqa5tdtestestestestestestest",
+    data="https://github.com/autogoninc/autogon-public-datasets/raw/main/credit-risk/sample_pred.csv",
+)
+```
 
 ### Additional AutogonAI APIs
 
@@ -124,8 +134,12 @@ response = client.Qore.VisionAI.image_generation(
     "A dad and his son walking down the street towards a park", "512x512"
 )
 
-image = Image.open(client.Qore.VisionAI._process_image_to_bytes(response["image"]))
+image = Image.open(response["image"])
+image.show()
 ```
+Output:
+
+![Image of a dad and his son walking down the street towards a park](examples/showcase.PNG)
 
 ### Documentation
 

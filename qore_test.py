@@ -17,5 +17,5 @@ response = client.Qore.VisionAI.image_generation(
     "A dad and his son walking down the street towards a park", "512x512"
 )
 
-image = Image.open(client.Qore.VisionAI._process_image_to_bytes(response["image"]))
+image = Image.open(response["image"])
 image.show()

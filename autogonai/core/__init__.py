@@ -23,5 +23,5 @@ class Client(API):
         self.StateManagements = StateManagements(self)
         self.Datasets = Datasets(self)
         self.Blocks = Blocks(self)
-        self.ProductionPipelines = ProductionPipelines(self)
+        self.Production = Production(self)
         self.Qore = Qore(self)
