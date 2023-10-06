@@ -114,6 +114,16 @@ response = ann_train.run()
 
 This is just a basic example to demonstrate how to use the AutogonAI Python library. You can customize it to suit your specific machine learning project requirements.
 
+### Production Predictions
+
+You can also use the AutogonAI Python library to make predictions in production. Here's an example of how to call a production machine learning predict pipeline:
+
+```python
+response = client.Production.run_pipeline(
+    flow_id="fl-sy3bgqa5tdtestestestestestestest",
+    data="https://github.com/autogoninc/autogon-public-datasets/raw/main/credit-risk/sample_pred.csv",
+)
+```
 
 ### Additional AutogonAI APIs
 
