@@ -223,3 +223,89 @@ class Voice:
             self.endpoint + "voice-cloning/tts/", form_data=body, method="post"
         )
         return response
+
+
+class EssayMarker:
+    """Handles operations related to Autogon Qore."""
+
+    endpoint = "services/"
+
+    def __init__(self, client: any):
+        """Initializes the Production class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+
+    def essay_marker(self, question: str, essay: str, answer: str=None, word_length: int=None) -> dict:
+        """
+        This function is used to mark an essay based on a question and an answer.
+        Args:
+            question (str): The question to be answered.
+            essay (str): The essay to be marked.
+            answer (str): The answer to the question. If not provided, the question will be used to mark the essay.
+            word_length (int): The word length of the essay. If not provided, the final score will be returned without word length consideration.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {"question": question, "essay": essay, "answer": answer, "word_length": word_length}
+        response = self.client.send_request(
+            self.endpoint + "essay-marker/", json_data=body, method="post"
+        )
+        return response
+    
+
+class HR_AI:
+    """Handles operations related to Autogon Qore."""
+    
+    endpoint = "services/"
+
+    def __init__(self, client: any):
+        """Initializes the Production class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+
+    def job_description_analyzer(self, job_description: str, resume_url: str) -> dict:
+        """
+        This function is used to analyze a job description and a resume to check for compatibility.
+        Args:
+            job_description (str): The job description to be analyzed.
+            resume_url (str): The url of the resume to be analyzed.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {"job_description": job_description, "resume_url": resume_url}
+        response = self.client.send_request(
+            self.endpoint + "rank-resume/", json_data=body, method="post"
+        )
+        return response
+    
+    def employee_analyzer(self, survey: list) -> dict:
+        """
+        This function is used to analyze employee experience using survey data.
+        Args:
+            survey (List): The survey data to be analyzed. This is a list of dictionaries with the following structure:
+            [
+                {
+                    "question": "", // survey question
+                    "answer": "" // survey answer
+                },
+                {
+                    "question": "", // survey question
+                    "answer": "" // survey answer
+                }
+            ]
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "question_answers": survey
+        }
+        response = self.client.send_request(
+            self.endpoint + "employee-analysis/", json_data=body, method="post"
+        )
+        return response
