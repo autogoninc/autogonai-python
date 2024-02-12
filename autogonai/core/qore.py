@@ -282,8 +282,16 @@ class NaturalLanguage:
         )
         return response
 
-    def ask_your_data(self, data, prompt) -> dict:
-        body = {"data": data, "prompt": prompt}
+    def ask_your_data(self, dataset_url: str, prompt: str) -> dict:
+        """
+        This function is used to ask questions and gain insights from your dataset.
+        Args:
+            dataset_url (str): The url of the dataset to be used for asking questions.
+            prompt (str): The prompt for asking questions.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {"data": dataset_url, "prompt": prompt}
         response = self.client.send_request(
             self.endpoint + "ask-your-data/", json_data=body, method="post"
         )
