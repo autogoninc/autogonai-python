@@ -109,7 +109,7 @@ class Vision:
         )
         return response
 
-    def object_detection(self, image) -> dict:
+    def object_detection_v1(self, image) -> dict:
         """
         Detects objects in an image.
         Args:
@@ -120,6 +120,46 @@ class Vision:
         body = {"image": image, "operation": "object_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
+        )
+        return response
+    
+    def object_detection_v2(self, images: list, confidence_threshold=0.5, overlap_threshold=0.5) -> dict:
+        """
+        Detects objects in an image.
+        Args:
+            images (list): The list of image urls to be processed.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "image_urls": images,
+            "confidence_thresh": confidence_threshold,
+            "overlap_thresh": overlap_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "object-detection/", json_data=body, method="post"
+        )
+        return response
+    
+    def license_plate_detection(self, images: list, confidence_threshold=0.5, overlap_threshold=0.5) -> dict:
+        """
+        Detects license plates in an image.
+        Args:
+            images (list): The list of image urls to be processed.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "image_urls": images,
+            "confidence_thresh": confidence_threshold,
+            "overlap_thresh": overlap_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "license-plate-detection/", json_data=body, method="post"
         )
         return response
 
