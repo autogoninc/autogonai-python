@@ -289,7 +289,7 @@ class NaturalLanguage:
         )
         return response
 
-    def chatgpt(self, message) -> dict:
+    def llm_chat(self, message) -> dict:
         body = {"message": message}
         response = self.client.send_request(
             self.endpoint + "chat/", json_data=body, method="post"
