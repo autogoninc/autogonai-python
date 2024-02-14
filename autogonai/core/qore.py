@@ -39,85 +39,99 @@ class Vision:
         response = requests.get(img_url)
         return BytesIO(response.content)
 
-    def text_detection(self, image) -> dict:
+    def text_detection(self, image_url) -> dict:
         """
         Detects text in an image.
         Args:
-            image (str): The image to be processed.
+            image_url (str): The url of the image to be processed.
         Returns:
             dict: The response from the API.
         """
-        body = {"image": image, "operation": "text_detection"}
+        body = {"image_url": image_url, "operation": "text_detection"}
+        response = self.client.send_request(
+            self.endpoint + "vision-ai/", json_data=body, method="post"
+        )
+        return response
+
+    def document_text_detection(self, image_url) -> dict:
+        """
+        Detects text in a document.
+        Args:
+            image_url (str): The url of the image to be processed.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {"image_url": image_url, "operation": "document_text_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
         return response
 
-    def document_text_detection(self, image) -> dict:
-        body = {"image": image, "operation": "document_text_detection"}
-        response = self.client.send_request(
-            self.endpoint + "vision-ai/", form_data=body, method="post"
-        )
-        return response
-
-    def label_detection(self, image) -> dict:
+    def label_detection(self, image_url) -> dict:
         """
         Detects labels in an image.
         Args:
-            image (str): The image to be processed.
+            image_url (str): The url of the image to be processed.
         Returns:
             dict: The response from the API.
         """
-        body = {"image": image, "operation": "label_detection"}
+        body = {"image_url": image_url, "operation": "label_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
         return response
 
-    def landmark_detection(self, image) -> dict:
+    def landmark_detection(self, image_url) -> dict:
         """
         Detects landmarks in an image.
         Args:
-            image (str): The image to be processed.
+            image_url (str): The url of the image to be processed.
         Returns:
             dict: The response from the API.
         """
-        body = {"image": image, "operation": "landmark_detection"}
+        body = {"image_url": image_url, "operation": "landmark_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
         return response
 
-    def logo_detection(self, image) -> dict:
+    def logo_detection(self, image_url) -> dict:
         """
         Detects logos in an image.
         Args:
-            image (str): The image to be processed.
+            image_url (str): The url of the image to be processed.
         Returns:
             dict: The response from the API.
         """
-        body = {"image": image, "operation": "logo_detection"}
+        body = {"image_url": image_url, "operation": "logo_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
         return response
 
-    def web_detection(self, image) -> dict:
-        body = {"image": image, "operation": "web_detection"}
+    def web_detection(self, image_url) -> dict:
+        """
+        Returns web results for an image, including full matching images and similar images.
+        Args:
+            image_url (str): The url of the image to be processed.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {"image_url": image_url, "operation": "web_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
         return response
 
-    def object_detection_v1(self, image) -> dict:
+    def object_detection_v1(self, image_url) -> dict:
         """
         Detects objects in an image.
         Args:
-            image (str): The image to be processed.
+            image_url (str): The url of the image to be processed.
         Returns:
             dict: The response from the API.
         """
-        body = {"image": image, "operation": "object_detection"}
+        body = {"image_url": image_url, "operation": "object_detection"}
         response = self.client.send_request(
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
@@ -186,8 +200,8 @@ class Vision:
         )
         return response
 
-    def image_captioning(self, image, image_url) -> dict:
-        body = {"image": image, "image_url": image_url}
+    def image_captioning(self, image_url) -> dict:
+        body = {"image_url": image_url}
         response = self.client.send_request(
             self.endpoint + "image-captioning/", form_data=body, method="post"
         )
