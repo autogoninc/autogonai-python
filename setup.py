@@ -1,14 +1,20 @@
 from setuptools import setup, find_packages
 
+# Read the contents of your README file
+from os import path
+with open(path.join(path.abspath(path.dirname(__file__)), 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
-    name="autogonai",
-    version="0.1.1",
+    name="autogonai-python",
+    version="0.1.0",
     description="Python connector for Autogon Public APIs",
-    author="David Mbatuegwu",
-    author_email="david@autogon.ai",
+    author="Autogon AI Inc.",
+    author_email="infrastructure@autogon.ai",
     maintainer="David Mbatuegwu, Aaron Nwokoro",
-    maintainer_email="david@autogon.ai",
+    maintainer_email="infrastructure@autogon.ai",
     url="https://github.com/autogoninc/autogonai-python",
+    package_dir={"": "autogonai"},
     packages=find_packages(),
     install_requires=["python-dotenv==1.0.0"],
     classifiers=[
@@ -21,4 +27,5 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
+    python_requires=">=3.6",
 )

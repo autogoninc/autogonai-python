@@ -139,7 +139,7 @@ image.show()
 ```
 Output:
 
-![Image of a dad and his son walking down the street towards a park](examples/showcase.PNG)
+![Image of a dad and his son walking down the street towards a park](tests/showcase.PNG)
 
 ### Documentation
 
