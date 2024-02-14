@@ -14,7 +14,6 @@ setup(
     maintainer="David Mbatuegwu, Aaron Nwokoro",
     maintainer_email="infrastructure@autogon.ai",
     url="https://github.com/autogoninc/autogonai-python",
-    package_dir={"": "autogonai"},
     packages=find_packages(),
     install_requires=["python-dotenv==1.0.0"],
     classifiers=[
