@@ -207,11 +207,18 @@ class Vision:
         )
         return response
 
-    def document_qa(self, question, document, document_url) -> dict:
+    def document_qa(self, question, document) -> dict:
+        """
+        This function is used to answer questions based on a document image.
+        Args:
+            question (str): The question to be answered.
+            document (str): The document image to be used for answering the question.
+        Returns:
+            dict: The response from the API.
+        """
         body = {
             "question": question,
-            "document": document,
-            "document_url": document_url,
+            "document": document
         }
         response = self.client.send_request(
             self.endpoint + "document-qa/", form_data=body, method="post"
@@ -336,7 +343,13 @@ class NaturalLanguage:
         Returns:
             dict: The response from the API.
         """
-        body = {"question": question, "essay": essay, "answer": answer, "word_length": word_length}
+        body = {"question": question, "essay": essay}
+    
+        if answer:
+            body["answer"] = answer
+        if word_length:
+            body["word_length"] = word_length
+
         response = self.client.send_request(
             self.endpoint + "essay-marker/", json_data=body, method="post"
         )
@@ -423,3 +436,296 @@ class Voice:
             self.endpoint + "voice-cloning/tts/", form_data=body, method="post"
         )
         return response     
+    
+
+class Agriculture:
+    """Handles agriculture operations related to Autogon Qore."""
+    
+    endpoint = "services/"
+
+    def __init__(self, client: any):
+        """Initializes the Production class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+
+    
+    def ripe_strawberry_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects ripe strawberries in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "ripe_strawberry_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "agro-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def crop_weed_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects weeds in a an image and classifies them as crop or weed.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "crop_weed_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "agro-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def palm_tree_health_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies the health of palm trees in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "palm_tree_health_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "agro-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def cashew_disease_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies diseases in cashew leaves in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "cashew_disease_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "agro-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def apple_disease_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies diseases in apple leaves in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "apple_disease_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "agro-studies/", json_data=body, method="post"
+        )
+        return response
+    
+    def grape_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects grapes in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "grape_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "agro-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+
+
+class Medical:
+    """Handles medical operations related to Autogon Qore."""
+
+    endpoint = "services/"
+
+    def __init__(self, client: any):
+        """Initializes the Production class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+
+
+    def surgical_tools_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects surgical tools in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "surgical_tools_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "health-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def tuberculosis_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies tuberculosis in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "tuberculosis_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "health-studies/", json_data=body, method="post"
+        )
+        return response
+    
+    
+    def cervical_fracture_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies cervical fractures in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "cervical_fracture_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "health-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def chest_xray_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies diseases in chest x-ray images.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "chest_xray_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "health-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def kidney_stone_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies kidney stones in an image.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "kidney_stone_detection",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "health-studies/", json_data=body, method="post"
+        )
+        return response
+    
+
+    def head_ct_scan_analyzer(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+        """
+        Detects and classifies the presence of tumors in head CT scan images.
+        Args:
+            image_urls (list): The list of image urls to be processed.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "study_type": "head_ct_scan",
+            "image_urls": image_urls,
+            "overlap_threshold": overlap_threshold,
+            "confidence_threshold": confidence_threshold
+        }
+        response = self.client.send_request(
+            self.endpoint + "health-studies/", json_data=body, method="post"
+        )
+        return response
