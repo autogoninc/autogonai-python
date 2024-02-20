@@ -267,3 +267,5 @@ class Qore:
         self.VisionAI = Vision(client)
         self.NaturalLanguageAI = NaturalLanguage(client)
         self.Voice = Voice(client)
+        self.Medical = Medical(client)
+        self.Agro = Agriculture(client)
