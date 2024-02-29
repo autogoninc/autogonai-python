@@ -395,6 +395,30 @@ class NaturalLanguage:
             self.endpoint + "employee-analysis/", json_data=body, method="post"
         )
         return response
+    
+    def generate_dataset(self, prompt: str, rows: int) -> dict:
+        """
+        Generate artificial dataset in csv format from a text prompt given a defined number of rows
+        Args:
+            prompt (str): This states the type of data to be generated e.g Generate a bank transaction dataset.
+            rows (int): This defines the number of rows the dataset would have.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "prompt": prompt,
+            "rows": rows
+        }
+        response = self.client.send_request(
+            self.endpoint + "generate-data/", json_data=body, method="post"
+        )
+        return response
+    
+    def translate_text(self, text: str, source_language: str, target_language: str) -> dict:
+        """
+    
+        """
+        pass
 
 
 class Voice:
