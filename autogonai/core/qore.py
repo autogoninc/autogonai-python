@@ -395,6 +395,51 @@ class NaturalLanguage:
             self.endpoint + "employee-analysis/", json_data=body, method="post"
         )
         return response
+    
+    def generate_dataset(self, prompt: str, rows: int) -> dict:
+        """
+        Generate artificial dataset in csv format from a text prompt given a defined number of rows
+        Args:
+            prompt (str): This states the type of data to be generated e.g Generate a bank transaction dataset.
+            rows (int): This defines the number of rows the dataset would have.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "prompt": prompt,
+            "rows": rows
+        }
+        response = self.client.send_request(
+            self.endpoint + "generate-data/", json_data=body, method="post"
+        )
+        return response
+    
+    def translate_text(self, text: str, target_language: str, source_language: str = None) -> dict:
+        """
+        Dynamically translate text from one language to another. It supports text translation between two language pairs.
+        This service supports a wide variety of languages in language code that conform to ISO-639 (https://en.wikipedia.org/wiki/ISO_639)
+        Args:
+            text (str): Required. The content of the text to be translated in string format.
+            source_language (str): Optional. The ISO-639 language code of the input text if known.
+            target_language (str): Required. The ISO-639 language code to use for translation of the input text
+        Returns:
+            dict: The response from the API.
+        """
+        if source_language is None:
+            request_data = {
+                "text": text,
+                "target_language": target_language,
+            }
+        else:
+            request_data = {
+                "text": text,
+                "target_language": target_language,
+                "source_language": source_language,
+            }
+        response = self.client.send_request(
+            self.endpoint + "text-translation/", json_data=request_data, method="post"
+        )
+        return response
 
 
 class Voice:
