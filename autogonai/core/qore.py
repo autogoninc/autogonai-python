@@ -414,11 +414,32 @@ class NaturalLanguage:
         )
         return response
     
-    def translate_text(self, text: str, source_language: str, target_language: str) -> dict:
+    def translate_text(self, text: str, target_language: str, source_language: str = None) -> dict:
         """
-    
+        Dynamically translate text from one language to another. It supports text translation between two language pairs.
+        This service supports a wide variety of languages in language code that conform to ISO-639 (https://en.wikipedia.org/wiki/ISO_639)
+        Args:
+            text (str): Required. The content of the text to be translated in string format.
+            source_language (str): Optional. The ISO-639 language code of the input text if known.
+            target_language (str): Required. The ISO-639 language code to use for translation of the input text
+        Returns:
+            dict: The response from the API.
         """
-        pass
+        if source_language is None:
+            request_data = {
+                "text": text,
+                "target_language": target_language,
+            }
+        else:
+            request_data = {
+                "text": text,
+                "target_language": target_language,
+                "source_language": source_language,
+            }
+        response = self.client.send_request(
+            self.endpoint + "text-translation/", json_data=request_data, method="post"
+        )
+        return response
 
 
 class Voice:
