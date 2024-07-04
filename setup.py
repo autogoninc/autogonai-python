@@ -7,7 +7,7 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'README.md'), encoding
 
 setup(
     name="autogonai-python",
-    version="0.1.4",
+    version="0.1.5",
     description="Python connector for Autogon Public APIs",
     author="Autogon AI Inc.",
     author_email="infrastructure@autogon.ai",
@@ -25,6 +25,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
     python_requires=">=3.6",
 )

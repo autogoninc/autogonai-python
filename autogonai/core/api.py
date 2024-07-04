@@ -269,3 +269,4 @@ class Qore:
         self.Voice = Voice(client)
         self.Medical = Medical(client)
         self.Agro = Agriculture(client)
+        self.Playground = Playground(client)

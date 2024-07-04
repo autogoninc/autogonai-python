@@ -774,3 +774,41 @@ class Medical:
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
+    
+class Playground:
+    """
+    Handles playground operations related to Autogon Qore.
+    """
+
+    endpoint = "services/"
+
+    def __init__(self, client: any):
+        """Initializes the Production class.
+
+        Args:
+            client (any): The client object for making requests.
+        """
+        self.client = client
+        
+    def make_call(self, phone_number:str, prompt:list, response_required=True) -> dict:
+        """
+        Initiates a phone call to the specified phone number with the given prompts.
+    
+        Args:
+            phone_number (str): The phone number to call.
+            prompt (list of str): A list of prompts to be played during the call.
+            response_required (bool): Indicates if a response is required from the recipient. Default is True.
+    
+        Returns:
+            dict: The response from the API call.
+        """
+        self.endpoint= "customer-service/"
+        body = {
+            "phone_number": phone_number,
+            "response_required": response_required,
+            "prompt": prompt,
+        }
+        response = self.client.send_request(
+            self.endpoint + "api/v1/phone/make-call", json=body, method="post",
+        )
+        return response
