@@ -779,17 +779,19 @@ class Playground:
     """
     Handles playground operations related to Autogon Qore.
     """
-
+ 
     endpoint = "services/"
-
+ 
     def __init__(self, client: any):
         """Initializes the Production class.
-
+ 
         Args:
             client (any): The client object for making requests.
         """
         self.client = client
-        
+        self.client.url="https://api.autogon.ai/"
+ 
+       
     def make_call(self, phone_number:str, prompt:list, response_required=True) -> dict:
         """
         Initiates a phone call to the specified phone number with the given prompts.
