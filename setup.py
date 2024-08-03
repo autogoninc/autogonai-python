@@ -7,7 +7,11 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'README.md'), encoding
 
 setup(
     name="autogonai-python",
+<<<<<<< HEAD
     version="0.1.8",
+=======
+    version="0.1.6",
+>>>>>>> parent of 9090850 (chore: Override the client url for phone call API)
     description="Python connector for Autogon Public APIs",
     author="Autogon AI Inc.",
     author_email="infrastructure@autogon.ai",
