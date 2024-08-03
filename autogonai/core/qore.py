@@ -477,7 +477,7 @@ class NaturalLanguage:
         Generate a course from a list of PDF files.
 
         Args:
-            files (list): The list of file paths of the PDF files to be used for generating the course.
+            file_paths (list): The list of file paths of the PDF files to be used for generating the course.
 
         Returns:
             dict: The response from the API.
@@ -905,7 +905,6 @@ class Playground:
             client (any): The client object for making requests.
         """
         self.client = client
-        self.client.url = "https://api.autogon.ai/"
 
     def make_call(
         self, phone_number: str, prompt: list, response_required=True
@@ -920,7 +919,8 @@ class Playground:
 
         Returns:
             dict: The response from the API call.
-        """
+        """        
+        self.client.url = "https://api.autogon.ai/"
         self.endpoint = "customer-service/"
         body = {
             "phone_number": phone_number,
