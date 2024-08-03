@@ -440,6 +440,43 @@ class NaturalLanguage:
             self.endpoint + "text-translation/", json_data=request_data, method="post"
         )
         return response
+    
+    def generate_course(self, file_paths: list) -> dict:
+        """
+        Generate a course from a list of PDF files.
+
+        Args:
+            files (list): The list of file paths of the PDF files to be used for generating the course.
+
+        Returns:
+            dict: The response from the API.
+
+        Example:
+        ```
+        response = client.Qore.NaturalLanguage.generate_course(
+            ["/path/to/file1.pdf", "/path/to/file2.pdf"]
+        )
+        print(response)
+        ```
+        """
+
+        if not all([file_path.endswith(".pdf") for file_path in file_paths]):
+            raise ValueError("All files must be in PDF format.")
+
+        files = [
+            ('files', (file_path.split('/')[-1], open(file_path, 'rb'), 'application/pdf'))
+            for file_path in file_paths
+        ]
+
+        response = self.client.send_request(
+            self.endpoint + "create-course/", method="post", form_data=files
+        )
+
+        # close all opened files
+        for _, (name, file, _) in files:
+            file.close()
+
+        return response
 
 
 class Voice:
