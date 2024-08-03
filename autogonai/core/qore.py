@@ -136,8 +136,10 @@ class Vision:
             self.endpoint + "vision-ai/", form_data=body, method="post"
         )
         return response
-    
-    def object_detection_v2(self, images: list, confidence_threshold=0.5, overlap_threshold=0.5) -> dict:
+
+    def object_detection_v2(
+        self, images: list, confidence_threshold=0.5, overlap_threshold=0.5
+    ) -> dict:
         """
         Detects objects in an image.
         Args:
@@ -150,14 +152,16 @@ class Vision:
         body = {
             "image_urls": images,
             "confidence_thresh": confidence_threshold,
-            "overlap_thresh": overlap_threshold
+            "overlap_thresh": overlap_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "object-detection/", json_data=body, method="post"
         )
         return response
-    
-    def license_plate_detection(self, images: list, confidence_threshold=0.5, overlap_threshold=0.5) -> dict:
+
+    def license_plate_detection(
+        self, images: list, confidence_threshold=0.5, overlap_threshold=0.5
+    ) -> dict:
         """
         Detects license plates in an image.
         Args:
@@ -170,10 +174,41 @@ class Vision:
         body = {
             "image_urls": images,
             "confidence_thresh": confidence_threshold,
-            "overlap_thresh": overlap_threshold
+            "overlap_thresh": overlap_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "license-plate-detection/", json_data=body, method="post"
+        )
+        return response
+
+    def traffic_light_breach_detection(
+        self,
+        traffic_images: list,
+        traffic_light_images: list,
+        breach_region: dict,
+        skip_lp_num_detection: bool = False,
+        skip_traffic_light_classification: bool = False,
+    ) -> dict:
+        """
+        Detects license plates in an image.
+        Args:
+            images (list): The list of image urls to be processed.
+            confidence_threshold (float): The minimum confidence threshold for detected objects.
+            overlap_threshold (float): The minimum overlap threshold for detected objects.
+        Returns:
+            dict: The response from the API.
+        """
+        body = {
+            "traffic_images": traffic_images,
+            "traffic_light_images": traffic_light_images,
+            "breach_region": breach_region,
+            "skip_lp_num_detection": skip_lp_num_detection,
+            "skip_traffic_light_classification": skip_traffic_light_classification,
+        }
+        response = self.client.send_request(
+            self.endpoint + "traffic-light-breach-detection/",
+            json_data=body,
+            method="post",
         )
         return response
 
@@ -216,10 +251,7 @@ class Vision:
         Returns:
             dict: The response from the API.
         """
-        body = {
-            "question": question,
-            "document": document
-        }
+        body = {"question": question, "document": document}
         response = self.client.send_request(
             self.endpoint + "document-qa/", form_data=body, method="post"
         )
@@ -331,8 +363,10 @@ class NaturalLanguage:
             self.endpoint + "text-classification/", json_data=body, method="post"
         )
         return response
-    
-    def essay_marker(self, question: str, essay: str, answer: str=None, word_length: int=None) -> dict:
+
+    def essay_marker(
+        self, question: str, essay: str, answer: str = None, word_length: int = None
+    ) -> dict:
         """
         This function is used to mark an essay based on a question and an answer.
         Args:
@@ -344,7 +378,7 @@ class NaturalLanguage:
             dict: The response from the API.
         """
         body = {"question": question, "essay": essay}
-    
+
         if answer:
             body["answer"] = answer
         if word_length:
@@ -354,7 +388,7 @@ class NaturalLanguage:
             self.endpoint + "essay-marker/", json_data=body, method="post"
         )
         return response
-    
+
     def job_description_analyzer(self, job_description: str, resume_url: str) -> dict:
         """
         This function is used to analyze a job description and a resume to check for compatibility.
@@ -369,7 +403,7 @@ class NaturalLanguage:
             self.endpoint + "rank-resume/", json_data=body, method="post"
         )
         return response
-    
+
     def employee_analyzer(self, survey: list) -> dict:
         """
         This function is used to analyze employee experience using survey data.
@@ -388,14 +422,12 @@ class NaturalLanguage:
         Returns:
             dict: The response from the API.
         """
-        body = {
-            "question_answers": survey
-        }
+        body = {"question_answers": survey}
         response = self.client.send_request(
             self.endpoint + "employee-analysis/", json_data=body, method="post"
         )
         return response
-    
+
     def generate_dataset(self, prompt: str, rows: int) -> dict:
         """
         Generate artificial dataset in csv format from a text prompt given a defined number of rows
@@ -405,16 +437,15 @@ class NaturalLanguage:
         Returns:
             dict: The response from the API.
         """
-        body = {
-            "prompt": prompt,
-            "rows": rows
-        }
+        body = {"prompt": prompt, "rows": rows}
         response = self.client.send_request(
             self.endpoint + "generate-data/", json_data=body, method="post"
         )
         return response
-    
-    def translate_text(self, text: str, target_language: str, source_language: str = None) -> dict:
+
+    def translate_text(
+        self, text: str, target_language: str, source_language: str = None
+    ) -> dict:
         """
         Dynamically translate text from one language to another. It supports text translation between two language pairs.
         This service supports a wide variety of languages in language code that conform to ISO-639 (https://en.wikipedia.org/wiki/ISO_639)
@@ -439,6 +470,43 @@ class NaturalLanguage:
         response = self.client.send_request(
             self.endpoint + "text-translation/", json_data=request_data, method="post"
         )
+        return response
+    
+    def generate_course(self, file_paths: list) -> dict:
+        """
+        Generate a course from a list of PDF files.
+
+        Args:
+            files (list): The list of file paths of the PDF files to be used for generating the course.
+
+        Returns:
+            dict: The response from the API.
+
+        Example:
+        ```
+        response = client.Qore.NaturalLanguage.generate_course(
+            ["/path/to/file1.pdf", "/path/to/file2.pdf"]
+        )
+        print(response)
+        ```
+        """
+
+        if not all([file_path.endswith(".pdf") for file_path in file_paths]):
+            raise ValueError("All files must be in PDF format.")
+
+        files = [
+            ('files', (file_path.split('/')[-1], open(file_path, 'rb'), 'application/pdf'))
+            for file_path in file_paths
+        ]
+
+        response = self.client.send_request(
+            self.endpoint + "create-course/", method="post", form_data=files
+        )
+
+        # close all opened files
+        for _, (name, file, _) in files:
+            file.close()
+
         return response
 
 
@@ -480,12 +548,12 @@ class Voice:
         response = self.client.send_request(
             self.endpoint + "voice-cloning/tts/", form_data=body, method="post"
         )
-        return response     
-    
+        return response
+
 
 class Agriculture:
     """Handles agriculture operations related to Autogon Qore."""
-    
+
     endpoint = "services/"
 
     def __init__(self, client: any):
@@ -496,8 +564,12 @@ class Agriculture:
         """
         self.client = client
 
-    
-    def ripe_strawberry_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def ripe_strawberry_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects ripe strawberries in an image.
         Args:
@@ -511,15 +583,19 @@ class Agriculture:
             "study_type": "ripe_strawberry_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "agro-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def crop_weed_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def crop_weed_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects weeds in a an image and classifies them as crop or weed.
         Args:
@@ -533,15 +609,19 @@ class Agriculture:
             "study_type": "crop_weed_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "agro-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def palm_tree_health_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def palm_tree_health_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies the health of palm trees in an image.
         Args:
@@ -555,15 +635,19 @@ class Agriculture:
             "study_type": "palm_tree_health_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "agro-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def cashew_disease_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def cashew_disease_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies diseases in cashew leaves in an image.
         Args:
@@ -577,15 +661,19 @@ class Agriculture:
             "study_type": "cashew_disease_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "agro-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def apple_disease_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def apple_disease_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies diseases in apple leaves in an image.
         Args:
@@ -599,14 +687,19 @@ class Agriculture:
             "study_type": "apple_disease_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "agro-studies/", json_data=body, method="post"
         )
         return response
-    
-    def grape_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+
+    def grape_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects grapes in an image.
         Args:
@@ -620,14 +713,12 @@ class Agriculture:
             "study_type": "grape_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "agro-studies/", json_data=body, method="post"
         )
         return response
-    
-
 
 
 class Medical:
@@ -643,8 +734,12 @@ class Medical:
         """
         self.client = client
 
-
-    def surgical_tools_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def surgical_tools_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects surgical tools in an image.
         Args:
@@ -658,15 +753,19 @@ class Medical:
             "study_type": "surgical_tools_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def tuberculosis_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def tuberculosis_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies tuberculosis in an image.
         Args:
@@ -680,15 +779,19 @@ class Medical:
             "study_type": "tuberculosis_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
-    
-    
-    def cervical_fracture_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+
+    def cervical_fracture_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies cervical fractures in an image.
         Args:
@@ -702,15 +805,19 @@ class Medical:
             "study_type": "cervical_fracture_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def chest_xray_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def chest_xray_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies diseases in chest x-ray images.
         Args:
@@ -724,15 +831,19 @@ class Medical:
             "study_type": "chest_xray_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def kidney_stone_detection(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def kidney_stone_detection(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies kidney stones in an image.
         Args:
@@ -746,15 +857,19 @@ class Medical:
             "study_type": "kidney_stone_detection",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
-    
 
-    def head_ct_scan_analyzer(self, image_urls: list, overlap_threshold: float = 0.5, confidence_threshold: float = 0.3) -> dict:
+    def head_ct_scan_analyzer(
+        self,
+        image_urls: list,
+        overlap_threshold: float = 0.5,
+        confidence_threshold: float = 0.3,
+    ) -> dict:
         """
         Detects and classifies the presence of tumors in head CT scan images.
         Args:
@@ -768,49 +883,53 @@ class Medical:
             "study_type": "head_ct_scan",
             "image_urls": image_urls,
             "overlap_threshold": overlap_threshold,
-            "confidence_threshold": confidence_threshold
+            "confidence_threshold": confidence_threshold,
         }
         response = self.client.send_request(
             self.endpoint + "health-studies/", json_data=body, method="post"
         )
         return response
-    
+
+
 class Playground:
     """
     Handles playground operations related to Autogon Qore.
     """
- 
+
     endpoint = "services/"
- 
+
     def __init__(self, client: any):
         """Initializes the Production class.
- 
+
         Args:
             client (any): The client object for making requests.
         """
         self.client = client
-        self.client.url="https://api.autogon.ai/"
- 
-       
-    def make_call(self, phone_number:str, prompt:list, response_required=True) -> dict:
+        self.client.url = "https://api.autogon.ai/"
+
+    def make_call(
+        self, phone_number: str, prompt: list, response_required=True
+    ) -> dict:
         """
         Initiates a phone call to the specified phone number with the given prompts.
-   
+
         Args:
             phone_number (str): The phone number to call.
             prompt (list of str): A list of prompts to be played during the call.
             response_required (bool): Indicates if a response is required from the recipient. Default is True.
-   
+
         Returns:
             dict: The response from the API call.
         """
-        self.endpoint= "customer-service/"
+        self.endpoint = "customer-service/"
         body = {
             "phone_number": phone_number,
             "response_required": response_required,
             "prompt": prompt,
         }
         response = self.client.send_request(
-            self.endpoint + "api/v1/phone/make-call", json_data=body, method="post",
+            self.endpoint + "api/v1/phone/make-call",
+            json_data=body,
+            method="post",
         )
         return response

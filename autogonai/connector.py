@@ -51,17 +51,17 @@ class API:
         # Send an HTTP request based on the specified method
         if method.lower() == "post":
             response = requests.post(
-                url, headers=self.header, json=json_data, data=form_data
+                url, headers=self.header, json=json_data, files=form_data   
             )
         elif method.lower() == "get":
             response = requests.get(url, headers=self.header)
         elif method.lower() == "patch":
             response = requests.patch(
-                url, headers=self.header, json=json_data, data=form_data
+                url, headers=self.header, json=json_data, files=form_data
             )
         elif method.lower() == "put":
             response = requests.put(
-                url, headers=self.header, json=json_data, data=form_data
+                url, headers=self.header, json=json_data, files=form_data
             )
         elif method.lower() == "delete":
             response = requests.delete(url, headers=self.header)
